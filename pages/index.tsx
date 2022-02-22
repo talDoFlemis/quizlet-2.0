@@ -11,7 +11,7 @@ import Section4 from "../components/home/Section4"
 import Section5 from "../components/home/Section5"
 import SectionTeacher from "../components/home/SectionTeacher"
 import SectionTestimonials from "../components/home/SectionTestimonials"
-
+//TODO:REMOVE DARK MODE
 const Home: NextPage = () => {
   return (
     <div className="flex min-h-screen flex-col">
