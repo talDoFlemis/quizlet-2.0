@@ -15,7 +15,7 @@ function Header() {
   const { pathname } = router
 
   return (
-    <nav className="top-0 z-30 flex h-[6vh] items-center justify-between bg-[#ffffff] p-4 shadow-md md:h-[8vh] md:px-8">
+    <nav className="sticky top-0 z-30 flex h-[6vh] items-center justify-between bg-[#ffffff] px-4 shadow-md md:h-[8vh] md:px-8">
       {navbarMobileToggle && (
         <div className="absolute top-0 left-0 z-50 flex min-h-screen w-full flex-col justify-start space-y-4 bg-white py-4 shadow-md">
           <XIcon
@@ -61,14 +61,14 @@ function Header() {
       >
         <QuizletLogoOptions className="text-4xl text-[#4255ff]" />
       </div>
-      <div className="hidden h-full space-x-6 md:flex">
+      <div className="relative hidden h-full items-center space-x-6 md:flex">
         <a href="/">
           <QuizletLogo className="h-16 w-24 cursor-pointer text-[#4255ff]" />
         </a>
         <a
           href="/"
           className={cl(
-            "relative hidden h-full items-center text-sm font-bold hover:after:absolute hover:after:inset-0 hover:after:block hover:after:rounded-sm hover:after:border-4 hover:after:border-[#a8b1ff] lg:flex",
+            "relative hidden h-full items-center text-sm font-bold hover:after:absolute hover:after:inset-0 hover:after:block hover:after:rounded-sm hover:after:border-b-4 hover:after:border-[#a8b1ff] lg:flex",
             pathname === "/" &&
               "after:absolute after:inset-0 after:block after:rounded-sm after:border-b-4 after:border-[#a8b1ff] "
           )}
@@ -78,7 +78,7 @@ function Header() {
         <a
           href="/"
           className={cl(
-            "h-full items-center text-sm font-bold hover:after:absolute hover:after:inset-0 hover:after:block hover:after:rounded-sm hover:after:border-b-4 hover:after:border-[#a8b1ff] lg:flex",
+            "relative h-full items-center text-sm font-bold hover:after:absolute hover:after:inset-0 hover:after:block hover:after:rounded-sm hover:after:border-b-4 hover:after:border-[#a8b1ff] md:flex",
             pathname === "/subject" &&
               "after:absolute after:inset-0 after:block after:rounded-sm after:border-b-4 after:border-[#a8b1ff]"
           )}
