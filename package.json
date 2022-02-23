@@ -6,7 +6,9 @@
     "start": "next start",
     "lint": "next lint",
     "generate:nexus": "nodemon --exec 'ts-node --transpile-only -P nexus.tsconfig.json pages/api/graphql' --ext 'ts' --watch '*/graphql/**/*.ts'",
-    "generate:genql": "nodemon --exec 'genql --schema ./graphql/schema.graphql --output ./graphql/generated/genql'  --watch 'graphql/schema.graphql'"
+    "generate:genql": "nodemon --exec 'genql --schema ./graphql/schema.graphql --output ./graphql/generated/genql'  --watch 'graphql/schema.graphql'",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
   },
   "prisma": {
     "seed": "ts-node -O {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -40,7 +42,9 @@
     "eslint-plugin-jest": "^26.1.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-testing-library": "^5.0.5",
+    "husky": ">=6",
     "jest": "^27.5.1",
+    "lint-staged": ">=10",
     "postcss": "^8.4.5",
     "prettier": "^2.5.1",
     "prettier-plugin-tailwindcss": "^0.1.1",
@@ -48,5 +52,9 @@
     "tailwindcss": "^3.0.7",
     "ts-node": "^10.5.0",
     "typescript": "4.5.4"
+  },
+  "lint-staged": {
+    "*.(tsx|ts|js)": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write --ignore-unknown"
   }
 }
