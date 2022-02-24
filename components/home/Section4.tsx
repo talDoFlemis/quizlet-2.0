@@ -14,7 +14,7 @@ function Section4() {
         </p>
       </div>
       <div className="md:ml-16">
-        <Image src="/homeSections/section4.png" width={500} height={400} />
+        <Image src="/homeSections/section4.png" width={500} height={400} alt=""/>
       </div>
     </section>
   )

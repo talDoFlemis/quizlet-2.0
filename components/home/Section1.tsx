@@ -1,5 +1,3 @@
-import yellowCircle from "../svgs/yellowCircle.svg"
-
 function Section1() {
   return (
     <section className="mx-auto py-20 md:py-40 ">

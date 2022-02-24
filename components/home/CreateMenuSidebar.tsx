@@ -5,7 +5,6 @@ import {
   FolderIcon,
   CollectionIcon,
   UsersIcon,
-  PlusIcon,
 } from "@heroicons/react/outline"
 import cl from "clsx"
 

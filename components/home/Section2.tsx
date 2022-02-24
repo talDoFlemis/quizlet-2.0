@@ -16,7 +16,7 @@ function Section2() {
       </div>
 
       <div className="md:ml-16">
-        <Image src="/homeSections/section2.png" width={500} height={400} />
+        <Image src="/homeSections/section2.png" width={500} height={400} alt=""/>
       </div>
     </section>
   )

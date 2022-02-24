@@ -1,4 +1,3 @@
-import Image from "next/image"
 import QuizletLogo from "../svgs/quizletlogo.svg"
 import QuizletLogoOptions from "../svgs/quizletLogoOptions.svg"
 import CreateMenu from "./CreateMenu"
@@ -7,8 +6,15 @@ import { useState } from "react"
 import cl from "clsx"
 import { useRouter } from "next/router"
 import CreateMenuSidebar from "./CreateMenuSidebar"
+import Link from "next/link"
+import { ModalData } from "../../typings"
+import { Dispatch, SetStateAction } from "react"
 
-function Header() {
+interface Props {
+  setModalData: Dispatch<SetStateAction<ModalData>>
+}
+
+function Header({ setModalData }: Props) {
   const [searchBarWideOpen, setSearchBarWideOpen] = useState(false)
   const [navbarMobileToggle, setNavbarMobileToggle] = useState(false)
   const router = useRouter()
@@ -22,26 +28,27 @@ function Header() {
             className="ml-4 h-8 w-8 cursor-pointer rounded-full p-1 text-[#586380] hover:bg-[#5863803a] hover:text-black"
             onClick={() => setNavbarMobileToggle(false)}
           />
-          <a
-            href="/"
-            className={cl(
-              "relative w-full items-center justify-center pl-4 font-bold hover:after:absolute hover:after:inset-0 hover:after:block hover:after:rounded-sm hover:after:border-l-4 hover:after:border-[#a8b1ff]",
-              pathname === "/" &&
-                "after:absolute after:inset-0 after:block after:rounded-sm after:border-l-4 after:border-[#a8b1ff] "
-            )}
-          >
-            Home
-          </a>
-          <a
-            href="/Subjects"
-            className={cl(
-              "relative w-full items-center justify-center pl-4 font-bold hover:after:absolute hover:after:inset-0 hover:after:block hover:after:rounded-sm hover:after:border-l-4 hover:after:border-[#a8b1ff]",
-              pathname === "/Subjects" &&
-                "after:absolute after:inset-0 after:block after:rounded-sm after:border-l-4 after:border-[#a8b1ff] "
-            )}
-          >
-            Subjects
-          </a>
+          <Link href="/">
+            <a>
+              className=
+              {cl(
+                "relative w-full items-center justify-center pl-4 font-bold hover:after:absolute hover:after:inset-0 hover:after:block hover:after:rounded-sm hover:after:border-l-4 hover:after:border-[#a8b1ff]",
+                pathname === "/" &&
+                  "after:absolute after:inset-0 after:block after:rounded-sm after:border-l-4 after:border-[#a8b1ff] "
+              )}
+            </a>
+          </Link>
+          <Link href="/Subjects">
+            <a
+              className={cl(
+                "relative w-full items-center justify-center pl-4 font-bold hover:after:absolute hover:after:inset-0 hover:after:block hover:after:rounded-sm hover:after:border-l-4 hover:after:border-[#a8b1ff]",
+                pathname === "/Subjects" &&
+                  "after:absolute after:inset-0 after:block after:rounded-sm after:border-l-4 after:border-[#a8b1ff] "
+              )}
+            >
+              Subjects
+            </a>
+          </Link>
           <a
             href="/Explanation"
             className={cl(
@@ -62,39 +69,44 @@ function Header() {
         <QuizletLogoOptions className="text-4xl text-[#4255ff]" />
       </div>
       <div className="relative hidden h-full items-center space-x-6 md:flex">
-        <a href="/">
-          <QuizletLogo className="h-16 w-24 cursor-pointer text-[#4255ff]" />
-        </a>
-        <a
-          href="/"
-          className={cl(
-            "relative hidden h-full items-center text-sm font-bold hover:after:absolute hover:after:inset-0 hover:after:block hover:after:rounded-sm hover:after:border-b-4 hover:after:border-[#a8b1ff] lg:flex",
-            pathname === "/" &&
-              "after:absolute after:inset-0 after:block after:rounded-sm after:border-b-4 after:border-[#a8b1ff] "
-          )}
-        >
-          Home
-        </a>
-        <a
-          href="/"
-          className={cl(
-            "relative h-full items-center text-sm font-bold hover:after:absolute hover:after:inset-0 hover:after:block hover:after:rounded-sm hover:after:border-b-4 hover:after:border-[#a8b1ff] md:flex",
-            pathname === "/subject" &&
-              "after:absolute after:inset-0 after:block after:rounded-sm after:border-b-4 after:border-[#a8b1ff]"
-          )}
-        >
-          Subjects
-        </a>
-        <a
-          href="/"
-          className={cl(
-            "relative flex h-full items-center text-sm font-bold hover:after:absolute hover:after:inset-0 hover:after:block hover:after:rounded-sm hover:after:border-b-4 hover:after:border-[#a8b1ff]",
-            pathname === "/explanation" &&
-              "after:absolute after:inset-0 after:block after:rounded-sm after:border-b-4 after:border-[#a8b1ff] "
-          )}
-        >
-          Explanation
-        </a>
+        <Link href="/">
+          <a>
+            <QuizletLogo className="h-16 w-24 cursor-pointer text-[#4255ff]" />
+          </a>
+        </Link>
+        <Link href="/">
+          <a
+            className={cl(
+              "relative hidden h-full items-center text-sm font-bold hover:after:absolute hover:after:inset-0 hover:after:block hover:after:rounded-sm hover:after:border-b-4 hover:after:border-[#a8b1ff] lg:flex",
+              pathname === "/" &&
+                "after:absolute after:inset-0 after:block after:rounded-sm after:border-b-4 after:border-[#a8b1ff] "
+            )}
+          >
+            Home
+          </a>
+        </Link>
+        <Link href="/">
+          <a
+            className={cl(
+              "relative h-full items-center text-sm font-bold hover:after:absolute hover:after:inset-0 hover:after:block hover:after:rounded-sm hover:after:border-b-4 hover:after:border-[#a8b1ff] md:flex",
+              pathname === "/subject" &&
+                "after:absolute after:inset-0 after:block after:rounded-sm after:border-b-4 after:border-[#a8b1ff]"
+            )}
+          >
+            Subjects
+          </a>
+        </Link>
+        <Link href="/">
+          <a
+            className={cl(
+              "relative flex h-full items-center text-sm font-bold hover:after:absolute hover:after:inset-0 hover:after:block hover:after:rounded-sm hover:after:border-b-4 hover:after:border-[#a8b1ff]",
+              pathname === "/explanation" &&
+                "after:absolute after:inset-0 after:block after:rounded-sm after:border-b-4 after:border-[#a8b1ff] "
+            )}
+          >
+            Explanation
+          </a>
+        </Link>
         <CreateMenu />
       </div>
       {!searchBarWideOpen ? (
@@ -108,10 +120,20 @@ function Header() {
               Study sets, textbook...
             </h1>
           </div>
-          <button className="btn btn-ghost btn-sm border-none normal-case hover:bg-[#f6f7fb]">
+          <button
+            className="btn btn-ghost btn-sm border-none normal-case hover:bg-[#f6f7fb]"
+            onClick={() =>
+              setModalData({ modalOpen: true, modalOption: "login" })
+            }
+          >
             Log In
           </button>
-          <button className="btn btn-sm border-none bg-[#ffcd1f] normal-case text-black hover:bg-[#f8d555]">
+          <button
+            className="btn btn-sm border-none bg-[#ffcd1f] normal-case text-black hover:bg-[#f8d555]"
+            onClick={() =>
+              setModalData({ modalOpen: true, modalOption: "signin" })
+            }
+          >
             Sign Up
           </button>
         </div>

@@ -39,4 +39,14 @@
     line-height: 1.25;
     padding: 2.1875rem;
   }
+
+  .loginpage_image {
+    background-image: url("/loginImage.png");
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-flex: 50%;
+    -ms-flex: 50%;
+    flex: 50%;
+  }
 }

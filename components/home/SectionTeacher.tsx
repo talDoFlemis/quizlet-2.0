@@ -25,6 +25,7 @@ function SectionTeacher() {
           src="/homeSections/sectionTeacher.png"
           width={500}
           height={400}
+          alt=""
         />
       </div>
     </section>
