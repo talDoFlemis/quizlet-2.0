@@ -1,25 +1,21 @@
 import type { NextPage } from "next"
-import { useSession } from "next-auth/react"
 import Head from "next/head"
 import { useState } from "react"
-import EntryPage from "../components/home/EntryPage"
-import Header from "../components/home/Header"
-import ModalLoginAndSignIn from "../components/home/ModalLoginAndSignIn"
-import SectioCallToAction from "../components/home/SectioCallToAction"
-import Section1 from "../components/home/Section1"
-import Section2 from "../components/home/Section2"
-import Section3 from "../components/home/Section3"
-import Section4 from "../components/home/Section4"
-import Section5 from "../components/home/Section5"
-import SectionTeacher from "../components/home/SectionTeacher"
-import SectionTestimonials from "../components/home/SectionTestimonials"
+import EntryPage from "@components/home/EntryPage"
+import Header from "@components/home/Header"
+import ModalLoginAndSignIn from "@components/home/ModalLoginAndSignIn"
+import SectioCallToAction from "@components/home/SectioCallToAction"
+import Section1 from "@components/home/Section1"
+import Section2 from "@components/home/Section2"
+import Section3 from "@components/home/Section3"
+import Section4 from "@components/home/Section4"
+import Section5 from "@components/home/Section5"
+import SectionTeacher from "@components/home/SectionTeacher"
+import SectionTestimonials from "@components/home/SectionTestimonials"
 import { ModalData } from "../typings"
 
 const Home: NextPage = () => {
-  const { data: session } = useSession()
-  console.log(session)
-
-  const [modalData, setModalData] = useState<ModalData>({ modalOpen: true })
+  const [modalData, setModalData] = useState<ModalData>({ modalOpen: false })
   return (
     <div className="flex min-h-screen flex-col">
       <Head>

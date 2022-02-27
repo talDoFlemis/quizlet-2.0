@@ -5,26 +5,29 @@ import {
   FolderIcon,
   CollectionIcon,
   UsersIcon,
+  PlusIcon,
 } from "@heroicons/react/outline"
 import cl from "clsx"
 
-function CreateMenuSidebar() {
+function CreateMenu() {
   return (
     <Menu as="div" className="relative">
-      <Menu.Button
-        className={cl(
-          "header_hover_small relative flex w-full items-center justify-start pl-4 font-bold"
-        )}
-      >
-        <h1>Create</h1>
-        <ChevronDownIcon
-          className="ml-2 -mr-1 h-5 w-5 text-black "
-          aria-hidden="true"
-        />
-      </Menu.Button>
+      <div>
+        <Menu.Button className="btn btn-sm border-none bg-[#4255ff] normal-case hover:bg-[#2f3cb4]">
+          <h1 className="hidden lg:inline-flex">Create</h1>
+          <ChevronDownIcon
+            className="ml-2 -mr-1 hidden h-5 w-5 text-violet-200 hover:text-violet-100 lg:inline-flex"
+            aria-hidden="true"
+          />
+          <PlusIcon
+            className="inline-flex h-5 w-5 text-violet-200 hover:text-violet-100 lg:hidden"
+            aria-hidden="true"
+          />
+        </Menu.Button>
+      </div>
       <Menu.Items
         as="div"
-        className="absolute ml-16 mt-2 flex w-56 flex-col space-y-2 rounded-lg border-2 bg-white text-sm shadow-md"
+        className="absolute mt-2 flex w-56 flex-col space-y-2 rounded-lg border-2 bg-white text-sm shadow-md"
       >
         <Menu.Item>
           {({ active }) => (
@@ -73,4 +76,4 @@ function CreateMenuSidebar() {
   )
 }
 
-export default CreateMenuSidebar
+export default CreateMenu

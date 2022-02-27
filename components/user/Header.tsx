@@ -5,18 +5,15 @@ import { SearchIcon, XIcon } from "@heroicons/react/outline"
 import { useState } from "react"
 import cl from "clsx"
 import { useRouter } from "next/router"
-import CreateMenuSidebar from "./CreateMenuSidebar"
+import CreateMenuSidebar from "./CreateMenuSideBar"
 import Link from "next/link"
-import { ModalData } from "../../typings"
-import { Dispatch, SetStateAction } from "react"
+import DropdownUserAvatar from "./DropdownUserAvatar"
+import DropdownNotifications from "./DropdownNotifications"
 
-interface Props {
-  setModalData: Dispatch<SetStateAction<ModalData>>
-}
-
-function Header({ setModalData }: Props) {
+function Header() {
   const [searchBarWideOpen, setSearchBarWideOpen] = useState(false)
   const [navbarMobileToggle, setNavbarMobileToggle] = useState(false)
+
   const router = useRouter()
   const { pathname } = router
 
@@ -38,18 +35,8 @@ function Header({ setModalData }: Props) {
               Home
             </a>
           </Link>
-          <Link href="/Subjects">
-            <a
-              className={cl(
-                "header_hover_small relative w-full items-center justify-center pl-4 font-bold",
-                pathname === "/Subjects" && "header_current_small"
-              )}
-            >
-              Subjects
-            </a>
-          </Link>
           <a
-            href="/Explanation"
+            href="https://quizlet.com/explanations"
             className={cl(
               "header_hover_small relative w-full items-center justify-center pl-4 font-bold",
               pathname === "/Explanation" && "header_current_small"
@@ -67,7 +54,7 @@ function Header({ setModalData }: Props) {
         <QuizletLogoOptions className="text-4xl text-[#4255ff]" />
       </div>
       <div className="relative hidden h-full items-center space-x-6 md:flex">
-        <Link href="/">
+        <Link href="/latest">
           <a>
             <QuizletLogo className="h-16 w-24 cursor-pointer text-[#4255ff]" />
           </a>
@@ -82,51 +69,30 @@ function Header({ setModalData }: Props) {
             Home
           </a>
         </Link>
-        <Link href="/">
-          <a
-            className={cl(
-              "header_hover_highlight relative h-full items-center text-sm font-bold md:flex",
-              pathname === "/subject" && "header_current"
-            )}
-          >
-            Subjects
-          </a>
-        </Link>
-        <Link href="/">
-          <a
-            className={cl(
-              "header_hover_highlight relative flex h-full items-center text-sm font-bold",
-              pathname === "/explanation" && "header_current"
-            )}
-          >
-            Explanation
-          </a>
-        </Link>
+        <a
+          href="https://quizlet.com/explanations"
+          className={cl(
+            "header_hover_highlight relative flex h-full items-center text-sm font-bold",
+            pathname === "/explanation" && "header_current"
+          )}
+        >
+          Explanation
+        </a>
         <CreateMenu />
       </div>
       {!searchBarWideOpen ? (
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-2">
           <div
-            className="group flex cursor-pointer items-center space-x-2 rounded-full border-2 bg-transparent p-2 font-bold text-[#555967] hover:border-[#a7adc1] lg:w-56 lg:rounded-md lg:bg-[#f6f7fb] lg:py-1 lg:px-3"
+            className="group flex cursor-pointer items-center space-x-2 rounded-full border-2 bg-transparent p-2 font-bold text-[#555967] transition-colors hover:border-[#a7adc1] lg:w-56 lg:rounded-md lg:bg-[#f6f7fb] lg:py-1 lg:px-3"
             onClick={() => setSearchBarWideOpen(!searchBarWideOpen)}
           >
-            <SearchIcon className="h-4 text-[#a7adc1] group-hover:text-black lg:h-6 lg:text-black " />
+            <SearchIcon className="h-4 text-[#a7adc1] transition-colors group-hover:text-black lg:h-6 lg:text-black" />
             <h1 className="hidden text-sm lg:inline-flex">
               Study sets, textbook...
             </h1>
           </div>
-          <button
-            className="btn btn-ghost btn-sm border-none normal-case hover:bg-[#f6f7fb]"
-            onClick={() => setModalData({ modalOpen: true, modalOption: 1 })}
-          >
-            Log In
-          </button>
-          <button
-            className="btn btn-sm border-none bg-[#ffcd1f] normal-case text-black hover:bg-[#f8d555]"
-            onClick={() => setModalData({ modalOpen: true, modalOption: 0 })}
-          >
-            Sign Up
-          </button>
+          <DropdownNotifications />
+          <DropdownUserAvatar />
         </div>
       ) : (
         <div className="flex w-5/12 items-center justify-between rounded-lg border-2 bg-[#f6f7fb] py-2 px-3 font-bold text-[#555967]">

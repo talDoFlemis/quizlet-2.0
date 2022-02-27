@@ -1,26 +1,18 @@
 import { Dialog, Tab, Transition } from "@headlessui/react"
 import React, { Dispatch, Fragment, SetStateAction } from "react"
 import { ModalData } from "../../typings"
-import QuizletLogo from "../svgs/quizletlogo.svg"
+import QuizletLogo from "@svgs/quizletlogo.svg"
 import { XIcon } from "@heroicons/react/outline"
 
-import { useForm, SubmitHandler } from "react-hook-form"
-
-type FormValues = {
-  username: string
-  password: string
-  email: string
-}
+import SignInForm from "./forms/SignInForm"
+import LogInForm from "./forms/LogInForm"
 
 interface Props {
   modalData: ModalData | undefined
   setModalData: Dispatch<SetStateAction<ModalData>>
 }
-
+//TODO:MOVE THIS TO A LOGIN PAGE FOR CREATING A CUSTOM LOGIN PAGE THAT WILL REDIRECT TO THAT PAGE
 function ModalLoginAndSignIn({ modalData, setModalData }: Props) {
-  const { register, handleSubmit } = useForm<FormValues>()
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data)
-
   return (
     <>
       <Transition appear show={modalData?.modalOpen} as={Fragment}>
@@ -64,12 +56,16 @@ function ModalLoginAndSignIn({ modalData, setModalData }: Props) {
                     </h1>
                     <QuizletLogo className="text-8xl text-white" />
                   </div>
-                  <div className="w-1/2 p-8">
+                  <div className="w-1/2 overflow-y-scroll p-8">
                     <XIcon
                       className="absolute right-0 mr-4 h-8 w-8 cursor-pointer"
                       onClick={() => setModalData({ modalOpen: false })}
                     />
-                    <Tab.Group className="mt-8 p-8" as="div">
+                    <Tab.Group
+                      className="mt-8 p-8"
+                      as="div"
+                      defaultIndex={modalData?.modalOption}
+                    >
                       <Tab.List className="mb-8 flex space-x-4">
                         <Tab
                           className={({ selected }) =>
@@ -92,51 +88,11 @@ function ModalLoginAndSignIn({ modalData, setModalData }: Props) {
                       </Tab.List>
                       <Tab.Panels>
                         <Tab.Panel>
-                          <div className="flex justify-between">
-                            <button className="btn-outline btn border-2 border-[#d9dde8] text-sm normal-case">
-                              Continue with Google
-                            </button>
-                            <button className="btn-outline btn border-2 border-[#d9dde8] text-sm normal-case">
-                              Continue with Facebook
-                            </button>
-                          </div>
-                          <div className="divider text-sm text-[#939bb4]">
-                            email
-                          </div>
-                          <form
-                            onSubmit={handleSubmit(onSubmit)}
-                            className="form-control"
-                          >
-                            <label htmlFor="email" className="label">
-                              Email
-                            </label>
-                            <input
-                              type="email"
-                              placeholder="user@quizlet.com"
-                              {...register("email")}
-                              className="input-bordered input input-md border-2 border-[#303545] focus:border-[#ffcd1f]"
-                            />
-                            <label htmlFor="username" className="label">
-                              Username
-                            </label>
-                            <input
-                              type="username"
-                              placeholder="andrew123"
-                              {...register("username")}
-                              className="input-bordered input input-md border-2 border-[#303545] focus:border-[#ffcd1f]"
-                            />
-                            <label htmlFor="password" className="label">
-                              Password
-                            </label>
-                            <input
-                              placeholder="●●●●●●●●"
-                              type="password"
-                              {...register("password")}
-                              className="input-bordered input input-md border-2 border-[#303545] focus:border-[#ffcd1f]"
-                            />
-                          </form>
+                          <SignInForm />
                         </Tab.Panel>
-                        <Tab.Panel>Content 1</Tab.Panel>
+                        <Tab.Panel>
+                          <LogInForm />
+                        </Tab.Panel>
                       </Tab.Panels>
                     </Tab.Group>
                   </div>

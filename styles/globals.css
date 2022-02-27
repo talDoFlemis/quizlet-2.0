@@ -49,4 +49,28 @@
     -ms-flex: 50%;
     flex: 50%;
   }
+
+  .header_hover_highlight {
+    @apply hover:after:absolute hover:after:inset-0 hover:after:block hover:after:rounded-sm hover:after:border-b-4 hover:after:border-[#a8b1ff];
+  }
+
+  .header_current {
+    @apply after:absolute after:inset-0 after:block after:rounded-sm after:border-b-4 after:border-[#a8b1ff];
+  }
+
+  .header_hover_small {
+    @apply hover:after:absolute hover:after:inset-0 hover:after:block hover:after:rounded-sm hover:after:border-l-4 hover:after:border-[#a8b1ff];
+  }
+
+  .header_current_small {
+    @apply after:absolute after:inset-0 after:block after:rounded-sm after:border-l-4 after:border-[#a8b1ff];
+  }
+
+  .shadowTotal {
+    --tw-shadow: 0 0 5px 0px rgb(0 0 0 / 0.1), 0 0 5px 5px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 0 5px 5px var(--tw-shadow-color),
+      0 0 5px 5px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
 }

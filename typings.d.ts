@@ -18,5 +18,5 @@ declare module "next-auth" {
 
 export interface ModalData {
   modalOpen: boolean
-  modalOption?: string
+  modalOption?: number
 }

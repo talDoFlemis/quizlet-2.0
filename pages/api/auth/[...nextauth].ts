@@ -1,5 +1,7 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import GoogleProvider from "next-auth/providers/google"
+import FacebookProvider from "next-auth/providers/facebook"
 
 export default NextAuth({
   providers: [
@@ -14,22 +16,30 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       authorize: (credentials) => {
-        // database look up
         if (
-          credentials?.username === "testeuser" &&
+          credentials?.username === "teste@quizletclone.com" &&
           credentials?.password === "test"
         ) {
           return {
-            id: 2,
-            name: "John",
-            email: "johndoe@test.com",
+            id: 22,
+            name: "testuser",
+            email: "teste@quizletclone.com",
           }
         }
 
         return null
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID as string,
+      clientSecret: process.env.GOOGLE_SECRET as string,
+    }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID as string,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
+    }),
   ],
+  pages: {},
   callbacks: {
     jwt: ({ token, user }) => {
       if (user) {
@@ -46,13 +56,9 @@ export default NextAuth({
       return session
     },
   },
+
   session: {
     strategy: "jwt",
     maxAge: 60 * 60 * 2,
   },
-
-  // pages: {
-  //   signIn: "/auth/signin",
-  //   signOut: "/auth/signout",
-  // },
 })
