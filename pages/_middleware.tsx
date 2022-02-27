@@ -1,23 +1,24 @@
+import { NextApiRequest } from "next"
 import { getToken } from "next-auth/jwt"
-import { NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
 
-export async function middleware(req: NextRequest) {
+export async function middleware(req: NextApiRequest) {
   const token = await getToken({
     req,
     secret: process.env.NEXTAUTH_SECRET as string,
     secureCookie: process.env.NODE_ENV === "production",
   })
 
-  const { pathname } = req.nextUrl
-  const url = req.nextUrl.clone()
+  const url = req.url as string
+  const parsedUrl = new URL(url)
 
-  if (!token && pathname === "/latest") {
-    url.pathname = "/"
-    return NextResponse.redirect(url)
+  if (!token && parsedUrl.pathname === "/latest") {
+    parsedUrl.pathname = "/"
+    return NextResponse.redirect(parsedUrl)
   }
 
-  if (token && pathname === "/") {
-    url.pathname = "/latest"
-    return NextResponse.redirect(url)
+  if (token && parsedUrl.pathname === "/") {
+    parsedUrl.pathname = "/latest"
+    return NextResponse.redirect(parsedUrl)
   }
 }
