@@ -37,7 +37,7 @@ function SignInForm() {
   })
 
   const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data)
-
+  //TODO Refactor the birthday input method
   return (
     <>
       <div className="flex justify-between">
@@ -54,7 +54,7 @@ function SignInForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="form-control">
         {errors.birthday ? (
           <label htmlFor="email" className="label text-[#ff725b]">
-            {errors.birthday?.message}
+            {errors.birthday?.day?.message}
           </label>
         ) : (
           <label htmlFor="email" className="label ">
