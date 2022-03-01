@@ -1,28 +1,42 @@
 import { objectType } from "nexus"
+import { DateTime } from "./DateTimeType"
+import { Deck } from "./DeckType"
+import { User } from "./UserType"
 
 export const Card = objectType({
   name: "Card",
   definition(t) {
-    t.nonNull.string("id")
-    t.nonNull.field("createdAt", {
-      type: "DateTime",
+    t.nonNull.id("deckId")
+    t.nonNull.id("userId")
+    t.field("createdAt", {
+      type: DateTime,
     })
-    t.nonNull.field("updatedAt", {
-      type: "DateTime",
+    t.field("updatedAt", {
+      type: DateTime,
     })
+    t.string("front")
+    t.string("back")
     t.nonNull.field("deck", {
-      type: "Deck",
+      type: Deck,
       resolve: async (root, _args, ctx) => {
-        return ctx.prisma.card
-          .findUnique({
-            where: {
-              id: root.id,
-            },
-          })
-          .deck()
+        return ctx.prisma.deck.findUnique({
+          where: {
+            id: root.deckId,
+          },
+          rejectOnNotFound: true,
+        })
       },
     })
-    t.nonNull.string("front")
-    t.nonNull.string("back")
+    t.nonNull.field("deckOwner", {
+      type: User,
+      resolve: async (root, _args, ctx) => {
+        return ctx.prisma.user.findUnique({
+          where: {
+            id: root.userId,
+          },
+          rejectOnNotFound: true,
+        })
+      },
+    })
   },
 })

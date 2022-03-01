@@ -1,12 +1,14 @@
 import { mutationField, nonNull, nullable } from "nexus"
-import { User, Deck } from "../types/"
+import { User } from "../types/UserType"
+import { Deck } from "../types/DeckType"
 import {
   CreateUserDeckInput,
   CreateUserInput,
-  DeckWhereUniqueInput,
   UserWhereUniqueInput,
   UpdateUserInput,
-} from "../inputs"
+} from "../inputs/UserInput"
+
+import { DeckWhereUniqueInput } from "../inputs/DeckInput"
 
 export const createUser = mutationField("createUser", {
   type: nullable(User),
@@ -50,7 +52,7 @@ export const createUserDeck = mutationField("createUserDeck", {
     return ctx.prisma.deck.create({
       data: {
         ...args.input,
-        ownerId: args.where.id,
+        userId: args.where.id,
       },
     })
   },

@@ -1,8 +1,10 @@
 import { enumType, objectType } from "nexus"
+import { DateTime } from "./DateTimeType"
+import { Deck } from "./DeckType"
 
 export const Role = enumType({
   name: "Role",
-  members: ["USER", "ADMIN"],
+  members: ["USER", "ADMIN", "PROF"],
 })
 
 export const User = objectType({
@@ -10,23 +12,26 @@ export const User = objectType({
   definition(t) {
     t.nonNull.string("id")
     t.nonNull.field("createdAt", {
-      type: "DateTime",
+      type: DateTime,
     })
     t.nonNull.field("updatedAt", {
-      type: "DateTime",
+      type: DateTime,
     })
-    t.nonNull.string("name")
-    t.nonNull.string("email")
-    t.nonNull.string("image")
-    t.nonNull.field("role", {
-      type: "Role",
+    t.string("name")
+    t.string("email")
+    t.string("image")
+    t.field("role", {
+      type: Role,
     })
     t.nonNull.list.nonNull.field("decks", {
-      type: "Deck",
-      resolve: (parent, _, context) => {
-        return context.prisma.user
+      type: Deck,
+      resolve: async (root, _args, ctx) => {
+        return ctx.prisma.user
           .findUnique({
-            where: { id: parent.id },
+            where: {
+              id: root.id,
+            },
+            rejectOnNotFound: true,
           })
           .decks()
       },

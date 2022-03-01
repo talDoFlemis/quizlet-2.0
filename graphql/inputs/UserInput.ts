@@ -11,11 +11,11 @@ export const CreateUserInput = inputObjectType({
   name: "CreateUserInput",
   definition(t) {
     t.nonNull.string("name")
+    t.nonNull.string("email")
+    t.nonNull.string("image")
     t.nonNull.field("role", {
       type: "Role",
     })
-    t.string("email")
-    t.string("image")
   },
 })
 
@@ -26,8 +26,8 @@ export const UpdateUserInput = inputObjectType({
     t.nonNull.field("role", {
       type: "Role",
     })
-    t.string("email")
-    t.string("image")
+    t.nonNull.string("email")
+    t.nonNull.string("image")
   },
 })
 

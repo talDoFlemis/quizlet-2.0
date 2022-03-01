@@ -15,11 +15,12 @@ model User {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  email     String?  @unique
-  image     String?
+  email     String   @unique
+  image     String
   name      String
-  role      Role     @default(USER)
+  role      Role
   decks     Deck[]
+  Card      Card[]
 }
 
 enum Role {
@@ -33,24 +34,20 @@ model Deck {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   title     String   @unique
-  deckOwner User?    @relation(fields: [ownerId], references: [id])
-  ownerId   String?
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
   cards     Card[]
 }
 
 model Card {
-  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  deck      Deck?    @relation(fields: [deckId], references: [id])
-  deckId    String?
+  deck      Deck     @relation(fields: [deckId], references: [id])
+  deckId    String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
   front     String
   back      String
-}
 
-model Teste {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String
+  @@id([deckId, userId])
 }

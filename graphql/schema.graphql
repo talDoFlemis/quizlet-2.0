@@ -3,12 +3,14 @@
 
 
 type Card {
-  back: String!
-  createdAt: DateTime!
+  back: String
+  createdAt: DateTime
   deck: Deck!
-  front: String!
-  id: String!
-  updatedAt: DateTime!
+  deckId: ID!
+  deckOwner: User!
+  front: String
+  updatedAt: DateTime
+  userId: ID!
 }
 
 input CreateUserDeckInput {
@@ -16,8 +18,8 @@ input CreateUserDeckInput {
 }
 
 input CreateUserInput {
-  email: String
-  image: String
+  email: String!
+  image: String!
   name: String!
   role: Role!
 }
@@ -31,8 +33,8 @@ type Deck {
   cards: [Card!]!
   createdAt: DateTime!
   deckOwner: User!
-  id: String!
-  title: String!
+  id: ID!
+  title: String
   updatedAt: DateTime!
 }
 
@@ -58,12 +60,13 @@ type Query {
 
 enum Role {
   ADMIN
+  PROF
   USER
 }
 
 input UpdateUserInput {
-  email: String
-  image: String
+  email: String!
+  image: String!
   name: String!
   role: Role!
 }
@@ -71,11 +74,11 @@ input UpdateUserInput {
 type User {
   createdAt: DateTime!
   decks: [Deck!]!
-  email: String!
+  email: String
   id: String!
-  image: String!
-  name: String!
-  role: Role!
+  image: String
+  name: String
+  role: Role
   updatedAt: DateTime!
 }
 
