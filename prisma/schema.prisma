@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model User {
@@ -16,8 +17,9 @@ model User {
   updatedAt DateTime @updatedAt
   email     String?  @unique
   image     String?
-  name      String?
-  role Role @default(USER)
+  name      String
+  role      Role     @default(USER)
+  decks     Deck[]
 }
 
 enum Role {
@@ -26,8 +28,29 @@ enum Role {
   PROF
 }
 
-model Cards {
+model Deck {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  title     String   @unique
+  deckOwner User?    @relation(fields: [ownerId], references: [id])
+  ownerId   String?
+  cards     Card[]
+}
+
+model Card {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deck      Deck?    @relation(fields: [deckId], references: [id])
+  deckId    String?
+  front     String
+  back      String
+}
+
+model Teste {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
 }

@@ -25,11 +25,11 @@ function Header() {
             className="ml-4 h-8 w-8 cursor-pointer rounded-full p-1 text-[#586380] hover:bg-[#5863803a] hover:text-black"
             onClick={() => setNavbarMobileToggle(false)}
           />
-          <Link href="/">
+          <Link href="/latest">
             <a
               className={cl(
                 "header_hover_small relative w-full items-center justify-center pl-4 font-bold",
-                pathname === "/" && "header_current_small"
+                pathname === "/latest" && "header_current_small"
               )}
             >
               Home
@@ -59,11 +59,11 @@ function Header() {
             <QuizletLogo className="h-16 w-24 cursor-pointer text-[#4255ff]" />
           </a>
         </Link>
-        <Link href="/">
+        <Link href="/latest">
           <a
             className={cl(
               "header_hover_highlight relative hidden h-full items-center text-sm font-bold lg:flex",
-              pathname === "/" && "header_current"
+              pathname === "/latest" && "header_current"
             )}
           >
             Home
