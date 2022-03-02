@@ -6,3 +6,34 @@ export const DeckWhereUniqueInput = inputObjectType({
     t.nonNull.id("id")
   },
 })
+
+export const CreateDeckCardInput = inputObjectType({
+  name: "CreateDeckCardInput",
+  definition(t) {
+    t.nonNull.string("front")
+    t.nonNull.string("back")
+  },
+})
+
+export const CardWhereUniqueInput = inputObjectType({
+  name: "CardWhereUniqueInput",
+  definition(t) {
+    t.nonNull.id("userId")
+    t.nonNull.id("deckId")
+  },
+})
+
+export const UpdateDeckCardInput = inputObjectType({
+  name: "UpdateDeckCardInput",
+  definition(t) {
+    t.nonNull.string("front")
+    t.nonNull.string("back")
+  },
+})
+
+export const UpdateDeckCardWhereUniqueInput = inputObjectType({
+  name: "UpdateDeckCardWhereUniqueInput",
+  definition(t) {
+    t.nonNull.string("cardId")
+  },
+})

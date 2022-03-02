@@ -1,5 +1,4 @@
 import { enumType, objectType } from "nexus"
-import { DateTime } from "./DateTimeType"
 import { Deck } from "./DeckType"
 
 export const Role = enumType({
@@ -12,10 +11,10 @@ export const User = objectType({
   definition(t) {
     t.nonNull.string("id")
     t.nonNull.field("createdAt", {
-      type: DateTime,
+      type: "DateTime",
     })
     t.nonNull.field("updatedAt", {
-      type: DateTime,
+      type: "DateTime",
     })
     t.string("name")
     t.string("email")

@@ -35,5 +35,9 @@ export const CreateUserDeckInput = inputObjectType({
   name: "CreateUserDeckInput",
   definition(t) {
     t.nonNull.string("title")
+    t.nonNull.string("description")
+    // t.nonNull.list.nonNull.field("cards", {
+    //   type: "Card",
+    // })
   },
 })

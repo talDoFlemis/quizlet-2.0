@@ -1,4 +1,4 @@
-import { mutationField, nonNull, nullable } from "nexus"
+import { arg, list, mutationField, nonNull, nullable } from "nexus"
 import { User } from "../types/UserType"
 import { Deck } from "../types/DeckType"
 import {
@@ -65,7 +65,7 @@ export const removeUserDeck = mutationField("removeUserDeck", {
   },
   resolve: async (_root, args, ctx) => {
     return ctx.prisma.deck.delete({
-      where: args.where,
+      where: { id: args.where.id },
     })
   },
 })

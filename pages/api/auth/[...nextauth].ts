@@ -2,8 +2,13 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
 
 export default NextAuth({
+  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -15,15 +20,16 @@ export default NextAuth({
         },
         password: { label: "Password", type: "password" },
       },
-      authorize: (credentials) => {
+      authorize: async (credentials) => {
         if (
           credentials?.username === "teste@quizletclone.com" &&
           credentials?.password === "test"
         ) {
+          const getUser = await prisma.user.findUnique({
+            where: { email: "teste@quizletclone.com" },
+          })
           return {
-            id: 22,
-            name: "testuser",
-            email: "teste@quizletclone.com",
+            ...getUser,
           }
         }
 
@@ -39,7 +45,10 @@ export default NextAuth({
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
     }),
   ],
-  pages: {},
+  pages: {
+    signIn: "/auth/login",
+    error: "/auth/login",
+  },
   callbacks: {
     jwt: ({ token, user }) => {
       if (user) {
@@ -52,11 +61,9 @@ export default NextAuth({
       if (token) {
         session.id = token.id
       }
-
       return session
     },
   },
-
   session: {
     strategy: "jwt",
     maxAge: 60 * 60 * 2,

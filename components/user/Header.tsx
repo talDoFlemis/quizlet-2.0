@@ -9,8 +9,10 @@ import CreateMenuSidebar from "./CreateMenuSideBar"
 import Link from "next/link"
 import DropdownUserAvatar from "./DropdownUserAvatar"
 import DropdownNotifications from "./DropdownNotifications"
+import { useSession } from "next-auth/react"
 
 function Header() {
+  const { data: session } = useSession()
   const [searchBarWideOpen, setSearchBarWideOpen] = useState(false)
   const [navbarMobileToggle, setNavbarMobileToggle] = useState(false)
 
@@ -92,7 +94,7 @@ function Header() {
             </h1>
           </div>
           <DropdownNotifications />
-          <DropdownUserAvatar />
+          <DropdownUserAvatar session={session} />
         </div>
       ) : (
         <div className="flex w-5/12 items-center justify-between rounded-lg border-2 bg-[#f6f7fb] py-2 px-3 font-bold text-[#555967]">

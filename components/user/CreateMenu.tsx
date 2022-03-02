@@ -8,6 +8,7 @@ import {
   PlusIcon,
 } from "@heroicons/react/outline"
 import cl from "clsx"
+import Link from "next/link"
 
 function CreateMenu() {
   return (
@@ -31,16 +32,17 @@ function CreateMenu() {
       >
         <Menu.Item>
           {({ active }) => (
-            <a
-              className={cl(
-                active && "bg-[#f6f7fb] text-black",
-                "flex items-center px-6 py-2 font-bold text-[#939bb4]"
-              )}
-              href="/account-settings"
-            >
-              <CollectionIcon className="mr-4 h-6 text-[#939bb4]" />
-              Study set
-            </a>
+            <Link href="/user/create-set">
+              <a
+                className={cl(
+                  active && "bg-[#f6f7fb] text-black",
+                  "flex items-center px-6 py-2 font-bold text-[#939bb4]"
+                )}
+              >
+                <CollectionIcon className="mr-4 h-6 text-[#939bb4]" />
+                Study set
+              </a>
+            </Link>
           )}
         </Menu.Item>
         <Menu.Item>

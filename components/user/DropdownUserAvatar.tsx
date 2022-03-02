@@ -3,18 +3,36 @@ import React, { Fragment } from "react"
 import { LogoutIcon } from "@heroicons/react/outline"
 import Image from "next/image"
 import { signOut } from "next-auth/react"
+import { Session } from "next-auth"
 
-function DropdownUserAvatar() {
+interface Props {
+  id: string
+  createdAt: Date
+  updatedAt: Date
+  email: string
+  image: string
+  name: string
+  role: string
+}
+
+interface Props2 {
+  session: Session | null
+}
+
+function DropdownUserAvatar({ session }: Props2) {
+  const image = session?.user?.image
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="mask mask-circle relative h-8 w-8 cursor-pointer">
-          <Image
-            src="/favicon.ico"
-            alt="user_icon"
-            objectFit="contain"
-            layout="fill"
-          />
+          {image && (
+            <Image
+              src={image}
+              alt="user_icon"
+              objectFit="contain"
+              layout="fill"
+            />
+          )}
         </Menu.Button>
       </div>
       <Transition

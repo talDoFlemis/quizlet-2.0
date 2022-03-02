@@ -1,6 +1,5 @@
 import { objectType } from "nexus"
 import { Card } from "./CardType"
-import { DateTime } from "./DateTimeType"
 import { User } from "./UserType"
 
 export const Deck = objectType({
@@ -8,13 +7,14 @@ export const Deck = objectType({
   definition(t) {
     t.nonNull.id("id")
     t.nonNull.field("createdAt", {
-      type: DateTime,
+      type: "DateTime",
     })
     t.nonNull.field("updatedAt", {
-      type: DateTime,
+      type: "DateTime",
     })
     t.string("title")
-    t.nonNull.field("deckOwner", {
+    t.string("description")
+    t.nonNull.field("userId", {
       type: User,
       resolve: async (root, _args, ctx) => {
         return ctx.prisma.user.findUnique({

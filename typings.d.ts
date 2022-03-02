@@ -11,7 +11,8 @@ declare module "components/svgs/*.svg" {
 declare module "next-auth" {
   interface Session {
     user: {
-      address: string
+      role?: string
+      id: string
     } & DefaultSession["user"]
   }
 }

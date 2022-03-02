@@ -17,6 +17,11 @@ export async function middleware(req: NextApiRequest) {
     return NextResponse.redirect(parsedUrl)
   }
 
+  if (token && parsedUrl.pathname === "/auth/login") {
+    parsedUrl.pathname = "/latest"
+    return NextResponse.redirect(parsedUrl)
+  }
+
   if (token && parsedUrl.pathname === "/") {
     parsedUrl.pathname = "/latest"
     return NextResponse.redirect(parsedUrl)

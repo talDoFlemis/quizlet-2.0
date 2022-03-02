@@ -4,16 +4,33 @@
 
 type Card {
   back: String
+  cardId: ID!
   createdAt: DateTime
   deck: Deck!
   deckId: ID!
-  deckOwner: User!
   front: String
   updatedAt: DateTime
+  user: User!
   userId: ID!
 }
 
+input CardInputType {
+  back: String!
+  front: String!
+}
+
+input CardWhereUniqueInput {
+  deckId: ID!
+  userId: ID!
+}
+
+input CreateDeckCardInput {
+  back: String!
+  front: String!
+}
+
 input CreateUserDeckInput {
+  description: String!
   title: String!
 }
 
@@ -32,10 +49,11 @@ scalar DateTime
 type Deck {
   cards: [Card!]!
   createdAt: DateTime!
-  deckOwner: User!
+  description: String
   id: ID!
   title: String
   updatedAt: DateTime!
+  userId: User!
 }
 
 input DeckWhereUniqueInput {
@@ -43,9 +61,12 @@ input DeckWhereUniqueInput {
 }
 
 type Mutation {
+  createDeckCard(input: CreateDeckCardInput!, where: CardWhereUniqueInput!): Card
   createUser(input: CreateUserInput!): User
   createUserDeck(input: CreateUserDeckInput!, where: UserWhereUniqueInput!): Deck
+  removeDeckCard(where: UpdateDeckCardWhereUniqueInput!): Card
   removeUserDeck(where: DeckWhereUniqueInput!): Deck
+  updateDeckCard(input: UpdateDeckCardInput!, where: UpdateDeckCardWhereUniqueInput!): Card
   updateUser(input: UpdateUserInput!, where: UserWhereUniqueInput!): User
 }
 
@@ -62,6 +83,15 @@ enum Role {
   ADMIN
   PROF
   USER
+}
+
+input UpdateDeckCardInput {
+  back: String!
+  front: String!
+}
+
+input UpdateDeckCardWhereUniqueInput {
+  cardId: String!
 }
 
 input UpdateUserInput {

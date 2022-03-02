@@ -29,6 +29,7 @@ const schema = yup
 
 function LogInForm() {
   const router = useRouter()
+  const { error: errorOauth } = router.query
   const [error, setError] = useState<Error>()
 
   const {
@@ -73,6 +74,12 @@ function LogInForm() {
       </button>
       {error?.ok === false && (
         <div className="text-[#ff725b]"> Please, verify your credentials</div>
+      )}
+      {errorOauth && (
+        <div className="text-[#ff725b]">
+          {" "}
+          The OAuth autenticantion is unavailable for now
+        </div>
       )}
       <form onSubmit={handleSubmit(onSubmit)} className="form-control">
         <div className="group w-full">
