@@ -6,20 +6,10 @@ import { signOut } from "next-auth/react"
 import { Session } from "next-auth"
 
 interface Props {
-  id: string
-  createdAt: Date
-  updatedAt: Date
-  email: string
-  image: string
-  name: string
-  role: string
-}
-
-interface Props2 {
   session: Session | null
 }
 
-function DropdownUserAvatar({ session }: Props2) {
+function DropdownUserAvatar({ session }: Props) {
   const image = session?.user?.image
   return (
     <Menu as="div" className="relative inline-block text-left">

@@ -1,4 +1,5 @@
 import { inputObjectType } from "nexus"
+import { CardInputType } from "./CardInput"
 
 export const UserWhereUniqueInput = inputObjectType({
   name: "UserWhereUniqueInput",
@@ -36,8 +37,6 @@ export const CreateUserDeckInput = inputObjectType({
   definition(t) {
     t.nonNull.string("title")
     t.nonNull.string("description")
-    // t.nonNull.list.nonNull.field("cards", {
-    //   type: "Card",
-    // })
+    t.nonNull.list.nonNull.field("cards", { type: CardInputType })
   },
 })

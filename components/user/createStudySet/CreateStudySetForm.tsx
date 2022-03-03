@@ -5,7 +5,7 @@ import * as yup from "yup"
 import cl from "clsx"
 import { PlusCircleIcon, TrashIcon } from "@heroicons/react/outline"
 import { Session } from "next-auth"
-import { GraphQLClient, gql } from "graphql-request"
+import { gql, request } from "graphql-request"
 
 type FormValues = {
   title: string
@@ -67,8 +67,46 @@ function CreateStudySet({ session }: Props) {
   })
   const createDeck = (data: FormValues) => {
     const main = async () => {
-      const mutation = gql``
+      const mutation = gql`
+        mutation CreateUserDeck(
+          $input: CreateUserDeckInput!
+          $where: UserWhereUniqueInput!
+        ) {
+          createUserDeck(input: $input, where: $where) {
+            cards {
+              back
+              front
+            }
+            title
+            description
+            id
+          }
+        }
+      `
+
+      const variables = {
+        input: {
+          title: data.title,
+          description: data.description,
+          cards: data.cards.map((card) => {
+            return {
+              front: card.front,
+              back: card.back,
+            }
+          }),
+        },
+        where: {
+          id: session?.id,
+        },
+      }
+      const endpoint = `${
+        process.env.NEXT_PUBLIC_BASE_URL as string
+      }/api/graphql`
+
+      request(endpoint, mutation, variables).then((data) => console.log(data))
     }
+
+    main().catch((err) => console.log(err))
   }
 
   return (

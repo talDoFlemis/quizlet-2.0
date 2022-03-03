@@ -30,6 +30,7 @@ input CreateDeckCardInput {
 }
 
 input CreateUserDeckInput {
+  cards: [CardInputType!]!
   description: String!
   title: String!
 }

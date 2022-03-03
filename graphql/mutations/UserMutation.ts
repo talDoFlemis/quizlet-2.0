@@ -1,4 +1,4 @@
-import { arg, list, mutationField, nonNull, nullable } from "nexus"
+import { mutationField, nonNull, nullable } from "nexus"
 import { User } from "../types/UserType"
 import { Deck } from "../types/DeckType"
 import {
@@ -53,6 +53,17 @@ export const createUserDeck = mutationField("createUserDeck", {
       data: {
         ...args.input,
         userId: args.where.id,
+        cards: {
+          createMany: {
+            data: args.input.cards.map((card) => {
+              return {
+                userId: args.where.id,
+                front: card.front,
+                back: card.back,
+              }
+            }),
+          },
+        },
       },
     })
   },
