@@ -49,7 +49,7 @@ function Header({ setModalData }: Props) {
             </a>
           </Link>
           <a
-            href="/Explanation"
+            href="https://quizlet.com/explanations"
             className={cl(
               "header_hover_small relative w-full items-center justify-center pl-4 font-bold",
               pathname === "/Explanation" && "header_current_small"
@@ -97,16 +97,15 @@ function Header({ setModalData }: Props) {
             Subjects
           </a>
         </Link>
-        <Link href="/">
-          <a
-            className={cl(
-              "header_hover_highlight relative flex h-full items-center text-sm font-bold",
-              pathname === "/explanation" && "header_current"
-            )}
-          >
-            Explanation
-          </a>
-        </Link>
+        <a
+          href="https://quizlet.com/explanations"
+          className={cl(
+            "header_hover_highlight relative flex h-full items-center text-sm font-bold",
+            pathname === "/explanation" && "header_current"
+          )}
+        >
+          Explanation
+        </a>
         <Link href="/dev_contact">
           <a className="header_hover_highlight relative flex h-full items-center text-sm font-bold">
             Dev Contact

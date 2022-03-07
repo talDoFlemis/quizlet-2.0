@@ -1,3 +1,4 @@
+import Link from "next/link"
 import React from "react"
 
 function EntryPage() {
@@ -15,9 +16,11 @@ function EntryPage() {
               tools at your fingertips.
             </p>
           </div>
-          <button className="btn btn-lg mt-4 w-40 bg-[#4255ff] text-sm normal-case hover:bg-[#313fbd] sm:w-1/5 sm:place-self-end lg:w-40">
-            Get started
-          </button>
+          <Link href="/auth/login">
+            <a className="btn btn-lg mt-4 w-40 bg-[#4255ff] text-sm normal-case hover:bg-[#313fbd] sm:w-1/5 sm:place-self-end lg:w-40">
+              <button>Get started</button>
+            </a>
+          </Link>
         </div>
       </div>
     </div>

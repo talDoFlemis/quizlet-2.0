@@ -50,7 +50,7 @@ function LogInForm() {
     if (resp) {
       const errorHandling: Error = resp
       if (errorHandling.ok) {
-        return router.push("/")
+        return router.push("/latest")
       }
       setError(errorHandling)
     }
