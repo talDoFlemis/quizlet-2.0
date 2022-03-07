@@ -50,7 +50,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     deckId: deckId,
   }
 
-  const data = await request("/api/graphql", query, variables)
+  const data = await request(
+    `${process.env.NEXTAUTH_URL}/api/graphql`,
+    query,
+    variables
+  )
 
   return {
     props: {
