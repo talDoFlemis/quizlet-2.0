@@ -43,7 +43,7 @@ function LogInForm() {
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const resp = await signIn("credentials", {
-      redirect: true,
+      redirect: false,
       username: data.username,
       password: data.password,
     })
@@ -77,13 +77,11 @@ function LogInForm() {
       {error?.ok === false && (
         <div className="text-[#ff725b]"> Please, verify your credentials</div>
       )}
-      {errorOauth === "OAuthSignin" ? (
+      {errorOauth === "OAuthSignin" && (
         <div className="text-[#ff725b]">
           {" "}
           The OAuth autenticantion is unavailable for now
         </div>
-      ) : (
-        <div className="text-[#ff725b]"> Please, verify your credentials</div>
       )}
       <form onSubmit={handleSubmit(onSubmit)} className="form-control">
         <div className="group w-full">
