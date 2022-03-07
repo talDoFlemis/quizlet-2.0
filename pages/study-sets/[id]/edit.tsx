@@ -51,7 +51,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   const data = await request(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/graphql`,
+    `${process.env.NEXT_PUBLIC_BASE_URL as string}/api/graphql`,
     query,
     variables
   )
