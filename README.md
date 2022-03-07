@@ -1,27 +1,31 @@
-# Next.js + Tailwind CSS Example
+# Quilzet Clone
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+## A Full Stack Quizlet Clone App made with **Graphql** code-first approach with Nexus and Prisma for generating the type-safe
 
-## Preview
+![Homescreen](.github/home.png)
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+## Tech Stack
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+### Frontend
 
-## Deploy your own
+- NextJS
+- Tailwind
+- Daisyui
+- Typescript
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+### Backend
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+- Postgresql
+- Graphql
+- Nexus
+- Prisma
+- Next-Auth with Credentials
 
-## How to use
+### Deployment
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+- Backend on Heroku
+- Frontend on Vercel
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
+## Installation
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+For a full experience of Donos da Bala some enviroment variables is required that you can see on **.env.example**
