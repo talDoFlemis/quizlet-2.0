@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from "next"
 import React, { useState } from "react"
 import ReactCardFlip from "react-card-flip"
 import { Swiper, SwiperSlide } from "swiper/react"
+import prisma from "../../../prisma/prisma"
 
 import {
   DuplicateIcon,
@@ -19,12 +20,14 @@ import "swiper/css/keyboard"
 import "swiper/css/effect-coverflow"
 import { Keyboard, Navigation, EffectCoverflow } from "swiper"
 import { useSwiperRef } from "hooks/useSwiperRef"
-import request, { gql } from "graphql-request"
+import request from "graphql-request"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import DropdownDeleteMenu from "@components/study-sets/DropdownDeleteMenu"
 import DeleteModal from "@components/study-sets/DeleteModal"
 import { DeckData } from "typings"
+import createStaticApolloClient from "@lib/apolloClient"
+import { ApolloClient, gql, NormalizedCacheObject } from "@apollo/client"
 
 interface SwiperData {
   allSlides: number
@@ -202,19 +205,10 @@ export default StudySet
 StudySet.PageLayout = LoggedUserLayout
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const query = gql`
-    query Decks {
-      decks {
-        id
-      }
-    }
-  `
+  const data = await prisma.deck.findMany()
+  const decks = JSON.parse(JSON.stringify(data))
 
-  const resp = await request(
-    `${process.env.NEXTAUTH_URL as string}/api/graphql`,
-    query
-  )
-  const paths = resp.decks.map((deck: DeckData) => ({
+  const paths = decks.map((deck: DeckData) => ({
     params: { id: deck.id },
   }))
 
@@ -225,42 +219,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const query = gql`
-    query Deck($deckId: String!) {
-      deck(id: $deckId) {
-        id
-        title
-        description
-        user {
-          name
-          image
-          id
-        }
-        cards {
-          cardId
-          front
-          back
-          updatedAt
-          createdAt
-        }
-        createdAt
-        updatedAt
-      }
-    }
-  `
-  const variables = {
-    deckId: `${params?.id}`,
-  }
-
-  const data = await request(
-    `${process.env.NEXTAUTH_URL as string}/api/graphql`,
-    query,
-    variables
-  )
+  const data = await prisma.deck.findUnique({
+    where: { id: String(params?.id) },
+    include: {
+      user: true,
+      cards: true,
+    },
+  })
+  const deck = JSON.parse(JSON.stringify(data))
 
   return {
     props: {
-      deck: data.deck,
+      deck,
     },
   }
 }

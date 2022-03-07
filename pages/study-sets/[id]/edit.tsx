@@ -1,10 +1,10 @@
 import LoggedUserLayout from "@components/layout/LoggedUserLayout"
 import EditDeckForm from "@components/study-sets/EditDeckForm"
-import request, { gql } from "graphql-request"
 import { GetServerSideProps } from "next"
 import Head from "next/head"
 import React from "react"
 import { DeckData } from "typings"
+import prisma from "../../../prisma/prisma"
 
 interface Props {
   deckId: string
@@ -26,39 +26,22 @@ export default Edit
 
 Edit.PageLayout = LoggedUserLayout
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const deckId = context?.params?.id
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const deckId = params?.id
 
-  const query = gql`
-    query Deck($deckId: String!) {
-      deck(id: $deckId) {
-        id
-        title
-        description
-        user {
-          id
-        }
-        cards {
-          front
-          back
-          cardId
-        }
-      }
-    }
-  `
-  const variables = {
-    deckId: deckId,
-  }
-
-  const data = await request(
-    `${process.env.NEXTAUTH_URL}/api/graphql`,
-    query,
-    variables
-  )
+  const data = await prisma.deck.findUnique({
+    where: {
+      id: String(deckId),
+    },
+    include: {
+      cards: true,
+    },
+  })
+  const deck = JSON.parse(JSON.stringify(data))
 
   return {
     props: {
-      deck: data.deck,
+      deck,
     },
   }
 }
