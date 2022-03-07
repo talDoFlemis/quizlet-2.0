@@ -103,9 +103,7 @@ function CreateStudySet({ session }: Props) {
           id: session?.id,
         },
       }
-      const endpoint = `${
-        process.env.NEXT_PUBLIC_BASE_URL as string
-      }/api/graphql`
+      const endpoint = "api/graphql"
 
       request(endpoint, mutation, variables).then(() => router.push("/latest"))
     }

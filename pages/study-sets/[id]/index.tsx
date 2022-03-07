@@ -211,7 +211,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   `
 
   const resp = await request(
-    `${process.env.NEXT_PUBLIC_BASE_URL as string}/api/graphql`,
+    `${process.env.NEXTAUTH_URL as string}/api/graphql`,
     query
   )
   const paths = resp.decks.map((deck: DeckData) => ({
@@ -253,7 +253,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const data = await request(
-    `${process.env.NEXT_PUBLIC_BASE_URL as string}/api/graphql`,
+    `${process.env.NEXTAUTH_URL as string}/api/graphql`,
     query,
     variables
   )

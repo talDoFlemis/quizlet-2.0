@@ -94,9 +94,7 @@ function EditDeckForm({ deck }: Props) {
           description: data.description,
         },
       }
-      const endpoint = `${
-        process.env.NEXT_PUBLIC_BASE_URL as string
-      }/api/graphql`
+      const endpoint = "/api/graphql"
 
       request(endpoint, mutationDeck, variables)
     }
@@ -125,9 +123,7 @@ function EditDeckForm({ deck }: Props) {
             back: card.back,
           },
         }
-        const endpoint = `${
-          process.env.NEXT_PUBLIC_BASE_URL as string
-        }/api/graphql`
+        const endpoint = "/api/graphql"
 
         request(endpoint, mutationCard, variables)
       })
