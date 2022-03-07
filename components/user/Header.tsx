@@ -47,6 +47,9 @@ function Header() {
             Explanation
           </a>
           <CreateMenuSidebar />
+          <Link href="/dev-contact">
+            <a>Dev Contact</a>
+          </Link>
         </div>
       )}
       <div

@@ -6,6 +6,7 @@ export const Deck = objectType({
   name: "Deck",
   definition(t) {
     t.nonNull.id("id")
+    t.nonNull.id("userId")
     t.nonNull.field("createdAt", {
       type: "DateTime",
     })
@@ -14,12 +15,12 @@ export const Deck = objectType({
     })
     t.string("title")
     t.string("description")
-    t.nonNull.field("userId", {
+    t.nonNull.field("user", {
       type: User,
       resolve: async (root, _args, ctx) => {
         return ctx.prisma.user.findUnique({
           where: {
-            id: root.id,
+            id: root.userId,
           },
           rejectOnNotFound: true,
         })

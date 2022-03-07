@@ -40,3 +40,12 @@ export const CreateUserDeckInput = inputObjectType({
     t.nonNull.list.nonNull.field("cards", { type: CardInputType })
   },
 })
+
+export const UpdateUserDeckInput = inputObjectType({
+  name: "UpdateUserDeckInput",
+  definition(t) {
+    t.nonNull.string("title")
+    t.nonNull.string("description")
+    // t.nonNull.list.nonNull.field("cards", { type: CardInputType })
+  },
+})

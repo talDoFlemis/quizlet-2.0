@@ -6,6 +6,7 @@ import cl from "clsx"
 import { PlusCircleIcon, TrashIcon } from "@heroicons/react/outline"
 import { Session } from "next-auth"
 import { gql, request } from "graphql-request"
+import { useRouter } from "next/router"
 
 type FormValues = {
   title: string
@@ -49,6 +50,8 @@ interface Props {
 }
 
 function CreateStudySet({ session }: Props) {
+  const router = useRouter()
+
   const {
     register,
     control,
@@ -65,6 +68,7 @@ function CreateStudySet({ session }: Props) {
     name: "cards",
     control,
   })
+
   const createDeck = (data: FormValues) => {
     const main = async () => {
       const mutation = gql`
@@ -103,7 +107,7 @@ function CreateStudySet({ session }: Props) {
         process.env.NEXT_PUBLIC_BASE_URL as string
       }/api/graphql`
 
-      request(endpoint, mutation, variables).then((data) => console.log(data))
+      request(endpoint, mutation, variables).then(() => router.push("/latest"))
     }
 
     main().catch((err) => console.log(err))

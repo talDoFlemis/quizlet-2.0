@@ -6,9 +6,10 @@ import {
   CreateUserInput,
   UserWhereUniqueInput,
   UpdateUserInput,
+  UpdateUserDeckInput,
 } from "../inputs/UserInput"
 
-import { DeckWhereUniqueInput } from "../inputs/DeckInput"
+import { UpdateDeckInput, DeckWhereUniqueInput } from "../inputs/DeckInput"
 
 export const createUser = mutationField("createUser", {
   type: nullable(User),
@@ -64,6 +65,24 @@ export const createUserDeck = mutationField("createUserDeck", {
             }),
           },
         },
+      },
+    })
+  },
+})
+
+export const updateUserDeck = mutationField("updateUserDeck", {
+  type: nullable(Deck),
+  args: {
+    where: nonNull(UpdateDeckInput),
+    input: nonNull(UpdateUserDeckInput),
+  },
+  resolve: async (_root, args, ctx) => {
+    return ctx.prisma.deck.update({
+      where: {
+        id: args.where.id,
+      },
+      data: {
+        ...args.input,
       },
     })
   },

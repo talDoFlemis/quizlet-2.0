@@ -9,6 +9,12 @@ module.exports = {
     return config
   },
   images: {
-    domains: ["imgs.search.brave.com"],
+    domains: [
+      "imgs.search.brave.com",
+      "avatars.githubusercontent.com",
+      "cdn.jsdelivr.net",
+      "github.com",
+      "raw.githubusercontent.com",
+    ],
   },
 }

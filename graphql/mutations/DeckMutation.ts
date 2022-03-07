@@ -4,6 +4,7 @@ import {
   UpdateDeckCardWhereUniqueInput,
   UpdateDeckCardInput,
   CardWhereUniqueInput,
+  RemoveCardInput,
 } from "../inputs/DeckInput"
 import { Card } from "../types/CardType"
 
@@ -31,12 +32,25 @@ export const updateDeckCard = mutationField("updateDeckCard", {
     where: nonNull(UpdateDeckCardWhereUniqueInput),
   },
   resolve: async (_root, args, ctx) => {
-    return ctx.prisma.card.update({
+    return ctx.prisma.card.upsert({
       where: {
         cardId: args.where.cardId,
       },
-      data: {
+      update: {
         ...args.input,
+      },
+      create: {
+        ...args.input,
+        user: {
+          connect: {
+            id: args.where.userId,
+          },
+        },
+        deck: {
+          connect: {
+            id: args.where.deckId,
+          },
+        },
       },
     })
   },
@@ -45,7 +59,7 @@ export const updateDeckCard = mutationField("updateDeckCard", {
 export const removeDeckCard = mutationField("removeDeckCard", {
   type: nullable(Card),
   args: {
-    where: nonNull(UpdateDeckCardWhereUniqueInput),
+    where: nonNull(RemoveCardInput),
   },
   resolve: async (_root, args, ctx) => {
     return ctx.prisma.card.delete({

@@ -54,7 +54,8 @@ type Deck {
   id: ID!
   title: String
   updatedAt: DateTime!
-  userId: User!
+  user: User!
+  userId: ID!
 }
 
 input DeckWhereUniqueInput {
@@ -65,10 +66,11 @@ type Mutation {
   createDeckCard(input: CreateDeckCardInput!, where: CardWhereUniqueInput!): Card
   createUser(input: CreateUserInput!): User
   createUserDeck(input: CreateUserDeckInput!, where: UserWhereUniqueInput!): Deck
-  removeDeckCard(where: UpdateDeckCardWhereUniqueInput!): Card
+  removeDeckCard(where: RemoveCardInput!): Card
   removeUserDeck(where: DeckWhereUniqueInput!): Deck
   updateDeckCard(input: UpdateDeckCardInput!, where: UpdateDeckCardWhereUniqueInput!): Card
   updateUser(input: UpdateUserInput!, where: UserWhereUniqueInput!): User
+  updateUserDeck(input: UpdateUserDeckInput!, where: UpdateDeckInput!): Deck
 }
 
 type Query {
@@ -78,6 +80,10 @@ type Query {
   decks: [Deck!]!
   user(id: String!): User!
   users: [User]
+}
+
+input RemoveCardInput {
+  cardId: String!
 }
 
 enum Role {
@@ -93,6 +99,17 @@ input UpdateDeckCardInput {
 
 input UpdateDeckCardWhereUniqueInput {
   cardId: String!
+  deckId: String!
+  userId: String!
+}
+
+input UpdateDeckInput {
+  id: ID!
+}
+
+input UpdateUserDeckInput {
+  description: String!
+  title: String!
 }
 
 input UpdateUserInput {
