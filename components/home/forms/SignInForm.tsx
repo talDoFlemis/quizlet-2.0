@@ -37,7 +37,6 @@ function SignInForm() {
   })
 
   const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data)
-  //TODO Refactor the birthday input method
   return (
     <>
       <div className="flex justify-between">
@@ -52,33 +51,6 @@ function SignInForm() {
       </div>
       <div className="divider text-sm text-[#939bb4]">email</div>
       <form onSubmit={handleSubmit(onSubmit)} className="form-control">
-        {errors.birthday ? (
-          <label htmlFor="email" className="label text-[#ff725b]">
-            {errors.birthday?.day?.message}
-          </label>
-        ) : (
-          <label htmlFor="email" className="label ">
-            Birthday
-          </label>
-        )}
-        <div className="flex">
-          <select {...register("birthday.month")}>
-            <option value="Month">Month</option>
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
-          </select>
-          <select {...register("birthday.day")}></select>
-        </div>
         {errors.email ? (
           <label htmlFor="email" className="label text-[#ff725b]">
             {errors.email?.message}

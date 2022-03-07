@@ -75,7 +75,16 @@ function LogInForm() {
         Login in with Facebook
       </button>
       {error?.ok === false && (
-        <div className="text-[#ff725b]"> Please, verify your credentials</div>
+        <div className="text-[#ff725b]">
+          {" "}
+          Please, verify your credentials. They can be found in the{" "}
+          <a
+            href="https://github.com/talDoFlemis/quizlet-2.0"
+            className="font-bold underline"
+          >
+            github repository
+          </a>
+        </div>
       )}
       {errorOauth === "OAuthSignin" && (
         <div className="text-[#ff725b]">

@@ -29,3 +29,15 @@
 ## Installation
 
 To use this project some enviroment variables are required. You can see that on **.env.example**
+
+## Usage
+
+For log in use the following credentials:
+
+### Login
+
+- teste@quizletclone.com
+
+### Password
+
+- test
