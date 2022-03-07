@@ -11,6 +11,11 @@ import {
 
 import { UpdateDeckInput, DeckWhereUniqueInput } from "../inputs/DeckInput"
 
+interface Props {
+  front: string
+  back: string
+}
+
 export const createUser = mutationField("createUser", {
   type: nullable(User),
   args: {
@@ -56,7 +61,7 @@ export const createUserDeck = mutationField("createUserDeck", {
         userId: args.where.id,
         cards: {
           createMany: {
-            data: args.input.cards.map((card) => {
+            data: args.input.cards.map((card: Props) => {
               return {
                 userId: args.where.id,
                 front: card.front,
