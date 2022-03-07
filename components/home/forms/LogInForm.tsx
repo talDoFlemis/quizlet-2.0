@@ -31,6 +31,7 @@ function LogInForm() {
   const router = useRouter()
   const { error: errorOauth } = router.query
   const [error, setError] = useState<Error>()
+  console.log(errorOauth)
 
   const {
     register,
@@ -42,15 +43,16 @@ function LogInForm() {
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const resp = await signIn("credentials", {
-      redirect: false,
+      redirect: true,
       username: data.username,
       password: data.password,
     })
 
     if (resp) {
       const errorHandling: Error = resp
+      console.log(errorHandling)
       if (errorHandling.ok) {
-        return router.push("/latest")
+        router.push("/latest")
       }
       setError(errorHandling)
     }
@@ -75,11 +77,13 @@ function LogInForm() {
       {error?.ok === false && (
         <div className="text-[#ff725b]"> Please, verify your credentials</div>
       )}
-      {errorOauth && (
+      {errorOauth === "OAuthSignin" ? (
         <div className="text-[#ff725b]">
           {" "}
           The OAuth autenticantion is unavailable for now
         </div>
+      ) : (
+        <div className="text-[#ff725b]"> Please, verify your credentials</div>
       )}
       <form onSubmit={handleSubmit(onSubmit)} className="form-control">
         <div className="group w-full">
