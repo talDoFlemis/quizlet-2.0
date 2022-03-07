@@ -28,4 +28,4 @@
 
 ## Installation
 
-For a full experience of Donos da Bala some enviroment variables is required that you can see on **.env.example**
+To use this project some enviroment variables are required. You can see that on **.env.example**
