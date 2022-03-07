@@ -35,6 +35,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     },
     include: {
       cards: true,
+      user: true,
     },
   })
   const deck = JSON.parse(JSON.stringify(data))

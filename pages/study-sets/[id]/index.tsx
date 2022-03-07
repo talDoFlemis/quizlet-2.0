@@ -5,6 +5,11 @@ import React, { useState } from "react"
 import ReactCardFlip from "react-card-flip"
 import { Swiper, SwiperSlide } from "swiper/react"
 import prisma from "../../../prisma/prisma"
+import Image from "next/image"
+import { useRouter } from "next/router"
+import DropdownDeleteMenu from "@components/study-sets/DropdownDeleteMenu"
+import DeleteModal from "@components/study-sets/DeleteModal"
+import { DeckData } from "typings"
 
 import {
   DuplicateIcon,
@@ -20,14 +25,6 @@ import "swiper/css/keyboard"
 import "swiper/css/effect-coverflow"
 import { Keyboard, Navigation, EffectCoverflow } from "swiper"
 import { useSwiperRef } from "hooks/useSwiperRef"
-import request from "graphql-request"
-import Image from "next/image"
-import { useRouter } from "next/router"
-import DropdownDeleteMenu from "@components/study-sets/DropdownDeleteMenu"
-import DeleteModal from "@components/study-sets/DeleteModal"
-import { DeckData } from "typings"
-import createStaticApolloClient from "@lib/apolloClient"
-import { ApolloClient, gql, NormalizedCacheObject } from "@apollo/client"
 
 interface SwiperData {
   allSlides: number

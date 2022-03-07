@@ -20,7 +20,7 @@ function DevContact({ userInfo }: { userInfo: userGithubData }) {
           <ArrowLeftIcon className="mt-4 h-8 w-8 rounded-md hover:bg-[#4255ff5b] hover:text-[#4255ff]" />
         </a>
       </Link>
-      <h1 className="text-center text-5xl sm:text-6xl md:text-7xl">
+      <h1 className="text-center text-5xl font-extrabold sm:text-6xl md:text-7xl">
         Developer Contact
       </h1>
       <div className="mx-auto my-auto flex w-full flex-col px-12 py-8 sm:flex-row sm:space-x-8 sm:p-8 xl:h-[80vh] xl:w-[80vw]">

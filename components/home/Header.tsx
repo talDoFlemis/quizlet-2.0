@@ -57,6 +57,11 @@ function Header({ setModalData }: Props) {
           >
             Explanation
           </a>
+          <Link href="/dev-contact">
+            <a className="header_hover_small relative w-full items-center justify-center pl-4 font-bold">
+              Dev Contact
+            </a>
+          </Link>
           <CreateMenuSidebar />
         </div>
       )}
@@ -100,6 +105,11 @@ function Header({ setModalData }: Props) {
             )}
           >
             Explanation
+          </a>
+        </Link>
+        <Link href="/dev_contact">
+          <a className="header_hover_highlight relative flex h-full items-center text-sm font-bold">
+            Dev Contact
           </a>
         </Link>
         <CreateMenu />

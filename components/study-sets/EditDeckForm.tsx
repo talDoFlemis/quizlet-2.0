@@ -153,7 +153,7 @@ function EditDeckForm({ deck }: Props) {
           },
         }
 
-        await request("api/graphql", cardMutation, cardId)
+        await request("/api/graphql", cardMutation, cardId)
       }
       main().catch((err) => console.log(err))
 

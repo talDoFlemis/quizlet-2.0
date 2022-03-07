@@ -15,6 +15,7 @@ function UserHomePage() {
         id
         title
         description
+        updatedAt
         cards {
           cardId
         }
@@ -31,6 +32,11 @@ function UserHomePage() {
   if (!data && !error) {
     return <Loading />
   }
+  const decks: DeckData[] = data.decks
+
+  const sortedDecks = decks.sort((a, b) => {
+    return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+  })
 
   return (
     <div className="container mx-auto 2xl:w-5/6">
@@ -39,7 +45,7 @@ function UserHomePage() {
       </Head>
       <h1 className="mt-8 text-xl font-bold">Recent</h1>
       <div className="mt-8 grid grid-cols-3 gap-8">
-        {data?.decks.map((deck: DeckData) => (
+        {sortedDecks.map((deck: DeckData) => (
           <Link href={`study-sets/${deck.id}`} key={deck.id}>
             <a>
               <div className="card cursor-pointer bg-white text-sm shadow-md">

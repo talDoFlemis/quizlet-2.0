@@ -103,7 +103,7 @@ function CreateStudySet({ session }: Props) {
           id: session?.id,
         },
       }
-      const endpoint = "api/graphql"
+      const endpoint = "/api/graphql"
 
       request(endpoint, mutation, variables).then(() => router.push("/latest"))
     }
