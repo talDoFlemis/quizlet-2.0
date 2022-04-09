@@ -1,6 +1,5 @@
 import LoggedUserLayout from "@components/layout/LoggedUserLayout"
-import LinkButton from "@components/user/LinkButton"
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next"
+import { GetServerSideProps } from "next"
 import React, { useState } from "react"
 import ReactCardFlip from "react-card-flip"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -26,6 +25,7 @@ import "swiper/css/keyboard"
 import "swiper/css/effect-coverflow"
 import { Keyboard, Navigation, EffectCoverflow } from "swiper"
 import { useSwiperRef } from "hooks/useSwiperRef"
+import Head from "next/head"
 
 interface SwiperData {
   allSlides: number
@@ -48,6 +48,9 @@ function StudySet({ deck }: { deck: DeckData }) {
 
   return (
     <div className="mx-auto text-[#303545] md:w-fit">
+      <Head>
+        <title>{deck.title} | Quizlet Clone</title>
+      </Head>
       <ModalNotImplemented
         text="Due to limited time, and just one guy working on the project, this functionality was not made yet"
         isModalVisible={isModalVisible}
@@ -55,7 +58,7 @@ function StudySet({ deck }: { deck: DeckData }) {
       />
       <h1 className="mt-16 text-3xl font-bold">{deck.title}</h1>
       <div className="mt-8 flex space-x-4">
-        <aside className="flex flex-col">
+        <aside className="hidden flex-col md:flex">
           <h3 className="text-xs text-[#93a6d3]">STUDY</h3>
           <a
             className="flex cursor-pointer items-center space-x-4 rounded-md py-1 px-2 font-bold hover:bg-[#ffcd1f]"
@@ -95,7 +98,7 @@ function StudySet({ deck }: { deck: DeckData }) {
         </aside>
         <div className="flex h-max w-max flex-col">
           <Swiper
-            className="h-[360px] w-[600px] cursor-pointer"
+            className="h-[300px] w-[400px] cursor-pointer sm:h-[360px] sm:w-[600px]"
             effect={"coverflow"}
             coverflowEffect={{
               rotate: 50,
@@ -200,6 +203,7 @@ function StudySet({ deck }: { deck: DeckData }) {
           <DropdownDeleteMenu setDeleteModalVisible={setDeleteModalVisible} />
         </div>
       </div>
+      <p className="px-8 py-4 text-sm">{deck.description}</p>
       <DeleteModal
         deleteModalVisible={deleteModalVisible}
         setDeleteModalVisible={setDeleteModalVisible}

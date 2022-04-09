@@ -50,13 +50,13 @@ function ModalLoginAndSignIn({ modalData, setModalData }: Props) {
             >
               <div className="inline-block h-full w-full transform bg-white text-left align-middle shadow-xl transition-all">
                 <div className="flex h-screen">
-                  <div className="loginpage_image flex flex-col justify-between p-8">
+                  <div className="loginpage_image hidden flex-col justify-between p-8 sm:flex">
                     <h1 className="w-1/3 text-4xl font-bold text-[#3b4c9b]">
                       Smash sets in your sweats.
                     </h1>
                     <QuizletLogo className="text-8xl text-white" />
                   </div>
-                  <div className="w-1/2 overflow-y-scroll p-8">
+                  <div className="w-full overflow-y-scroll sm:w-1/2 sm:p-8">
                     <XIcon
                       className="absolute right-0 mr-4 h-8 w-8 cursor-pointer"
                       onClick={() => setModalData({ modalOpen: false })}

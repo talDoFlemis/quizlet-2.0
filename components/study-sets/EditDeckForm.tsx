@@ -52,8 +52,6 @@ interface Props {
 }
 
 function EditDeckForm({ deck }: Props) {
-  const { mutate } = useSWRConfig()
-
   const router = useRouter()
 
   const {
@@ -132,12 +130,10 @@ function EditDeckForm({ deck }: Props) {
       })
     }
 
-    mutate("/api/graphql")
-
     updateOnlyDeck().catch((err) => console.log(err))
     updateCards().catch((err) => console.log(err))
 
-    router.push("/latest")
+    router.push(`/study-sets/${deck.id}`)
   }
 
   const removeFlashcard = (index: number) => {

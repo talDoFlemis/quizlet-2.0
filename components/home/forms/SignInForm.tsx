@@ -46,12 +46,12 @@ function SignInForm() {
     <>
       <div className="flex justify-between">
         <button className="btn-outline btn border-2 border-[#d9dde8] text-sm normal-case hover:bg-[#016dc4]">
-          <GoogleIcon className="mr-4 text-xl" />
-          Continue with Google
+          <GoogleIcon className="text-xl sm:mr-4" />
+          <p className="hidden sm:inline-flex">Continue with Google</p>
         </button>
         <button className="btn-outline btn border-2 border-[#d9dde8] text-sm normal-case hover:bg-[#016dc4]">
-          <FacebookIcon className="mr-4 text-xl" />
-          Continue with Facebook
+          <FacebookIcon className="text-xl sm:mr-4" />
+          <p className="hidden sm:inline-flex">Continue with Facebook</p>
         </button>
       </div>
       <div className="divider text-sm text-[#939bb4]">email</div>
