@@ -1,6 +1,6 @@
 import LoggedUserLayout from "@components/layout/LoggedUserLayout"
 import LinkButton from "@components/user/LinkButton"
-import { GetStaticPaths, GetStaticProps } from "next"
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next"
 import React, { useState } from "react"
 import ReactCardFlip from "react-card-flip"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -10,6 +10,7 @@ import { useRouter } from "next/router"
 import DropdownDeleteMenu from "@components/study-sets/DropdownDeleteMenu"
 import DeleteModal from "@components/study-sets/DeleteModal"
 import { DeckData } from "typings"
+import ModalNotImplemented from "@components/layout/ModalNotImplemented"
 
 import {
   DuplicateIcon,
@@ -43,43 +44,54 @@ function StudySet({ deck }: { deck: DeckData }) {
   const router = useRouter()
 
   const [deleteModalVisible, setDeleteModalVisible] = useState(false)
+  const [isModalVisible, setModalVisible] = useState(false)
 
   return (
     <div className="mx-auto text-[#303545] md:w-fit">
+      <ModalNotImplemented
+        text="Due to limited time, and just one guy working on the project, this functionality was not made yet"
+        isModalVisible={isModalVisible}
+        setModalVisible={setModalVisible}
+      />
       <h1 className="mt-16 text-3xl font-bold">{deck.title}</h1>
       <div className="mt-8 flex space-x-4">
         <aside className="flex flex-col">
           <h3 className="text-xs text-[#93a6d3]">STUDY</h3>
-          <LinkButton
-            text="Flashcard"
-            Icon={DuplicateIcon}
-            link="/flashcards"
-            className="text-[#4257b2]"
-          />
-          <LinkButton
-            text="Learn"
-            Icon={AcademicCapIcon}
-            link="/flashcards"
-            className="text-[#4257b2]"
-          />
-          <LinkButton
-            text="Write"
-            Icon={PencilIcon}
-            link="/flashcards"
-            className="text-[#4257b2]"
-          />
-          <LinkButton
-            text="Spell"
-            Icon={VolumeUpIcon}
-            link="/flashcards"
-            className="text-[#4257b2]"
-          />
-          <LinkButton
-            text="Test"
-            Icon={DocumentDuplicateIcon}
-            link="/flashcards"
-            className="text-[#4257b2]"
-          />
+          <a
+            className="flex cursor-pointer items-center space-x-4 rounded-md py-1 px-2 font-bold hover:bg-[#ffcd1f]"
+            onClick={() => setModalVisible(true)}
+          >
+            <DuplicateIcon className="h-8 w-8 text-[#4257b2]" />
+            <p>Flashcard</p>
+          </a>
+          <a
+            className="flex cursor-pointer items-center space-x-4 rounded-md py-1 px-2 font-bold hover:bg-[#ffcd1f]"
+            onClick={() => setModalVisible(true)}
+          >
+            <AcademicCapIcon className="h-8 w-8 text-[#4257b2]" />
+            <p>Learn</p>
+          </a>
+          <a
+            className="flex cursor-pointer items-center space-x-4 rounded-md py-1 px-2 font-bold hover:bg-[#ffcd1f]"
+            onClick={() => setModalVisible(true)}
+          >
+            <PencilIcon className="h-8 w-8 text-[#4257b2]" />
+            <p>Write</p>
+          </a>
+          <a
+            className="flex cursor-pointer items-center space-x-4 rounded-md py-1 px-2 font-bold hover:bg-[#ffcd1f]"
+            onClick={() => setModalVisible(true)}
+          >
+            <VolumeUpIcon className="h-8 w-8 text-[#4257b2]" />
+            <p>Spell</p>
+          </a>
+          <a
+            className="flex cursor-pointer items-center space-x-4 rounded-md py-1 px-2 font-bold hover:bg-[#ffcd1f]"
+            onClick={() => setModalVisible(true)}
+          >
+            <DocumentDuplicateIcon className="h-8 w-8 text-[#4257b2]" />
+            <p>Test</p>
+          </a>
         </aside>
         <div className="flex h-max w-max flex-col">
           <Swiper
@@ -201,21 +213,7 @@ export default StudySet
 
 StudySet.PageLayout = LoggedUserLayout
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const data = await prisma.deck.findMany()
-  const decks = JSON.parse(JSON.stringify(data))
-
-  const paths = decks.map((deck: DeckData) => ({
-    params: { id: deck.id },
-  }))
-
-  return {
-    paths,
-    fallback: "blocking",
-  }
-}
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const data = await prisma.deck.findUnique({
     where: { id: String(params?.id) },
     include: {

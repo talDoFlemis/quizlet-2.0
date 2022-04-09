@@ -4,6 +4,12 @@ import useSWR from "swr"
 const fetcher = (query: string, variables?: object) =>
   request("/api/graphql", query, variables)
 
-export const useQuery = (query: string, variables?: object) => {
-  return useSWR([query, variables], fetcher)
+export const useQuery = (
+  query: string,
+  variables?: object,
+  refreshInterval?: number
+) => {
+  return useSWR([query, variables], fetcher, {
+    refreshInterval: refreshInterval ?? 0,
+  })
 }

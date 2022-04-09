@@ -7,6 +7,7 @@ import { PlusCircleIcon, TrashIcon } from "@heroicons/react/outline"
 import { gql, request } from "graphql-request"
 import { useRouter } from "next/router"
 import { DeckData } from "typings"
+import { useSWRConfig } from "swr"
 
 type FormValues = {
   title: string
@@ -51,6 +52,8 @@ interface Props {
 }
 
 function EditDeckForm({ deck }: Props) {
+  const { mutate } = useSWRConfig()
+
   const router = useRouter()
 
   const {
@@ -128,6 +131,8 @@ function EditDeckForm({ deck }: Props) {
         request(endpoint, mutationCard, variables)
       })
     }
+
+    mutate("/api/graphql")
 
     updateOnlyDeck().catch((err) => console.log(err))
     updateCards().catch((err) => console.log(err))
