@@ -36,7 +36,7 @@ function CreateMenu() {
               <a
                 className={cl(
                   active && "bg-[#f6f7fb] text-black",
-                  "flex items-center px-6 py-2 font-bold text-[#939bb4]"
+                  "flex items-center px-6 py-2 font-bold text-[#939bb4] hover:bg-[#f6f7fb]"
                 )}
               >
                 <CollectionIcon className="mr-4 h-6 text-[#939bb4]" />
@@ -52,7 +52,6 @@ function CreateMenu() {
                 active && "bg-[#f6f7fb] text-black",
                 "flex items-center px-6 py-2 font-bold text-[#939bb4]"
               )}
-              href="/account-settings"
             >
               <FolderIcon className="mr-4 h-6 text-[#939bb4]" />
               Folder
@@ -66,7 +65,6 @@ function CreateMenu() {
                 active && "bg-[#f6f7fb] text-black",
                 "mb-2 flex items-center px-6 py-2 font-bold text-[#939bb4]"
               )}
-              href="/account-settings"
             >
               <UsersIcon className="mr-4 h-6 text-[#939bb4]" />
               Class

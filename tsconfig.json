@@ -23,12 +23,6 @@
       "@tests/*": ["tests/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "components/dev_contact/Overview.jsx",
-    "**/*.jsx"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.jsx"],
   "exclude": ["node_modules"]
 }

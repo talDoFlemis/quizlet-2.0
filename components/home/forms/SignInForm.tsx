@@ -4,6 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import cl from "clsx"
 import GoogleIcon from "@svgs//socialMedia/google.svg"
 import FacebookIcon from "@svgs//socialMedia/facebook.svg"
+import { useState } from "react"
+import ModalNotImplemented from "@components/layout/ModalNotImplemented"
 
 interface FormValues {
   username: string
@@ -37,6 +39,9 @@ function SignInForm() {
   })
 
   const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data)
+
+  const [isModalVisible, setModalVisible] = useState(false)
+
   return (
     <>
       <div className="flex justify-between">
@@ -50,6 +55,11 @@ function SignInForm() {
         </button>
       </div>
       <div className="divider text-sm text-[#939bb4]">email</div>
+      <ModalNotImplemented
+        text="The capability of creating users with Graphql is alredy made, but I don't know how to save passwords safe in a postgresql table"
+        isModalVisible={isModalVisible}
+        setModalVisible={setModalVisible}
+      />
       <form onSubmit={handleSubmit(onSubmit)} className="form-control">
         {errors.email ? (
           <label htmlFor="email" className="label text-[#ff725b]">
@@ -117,7 +127,7 @@ function SignInForm() {
               errors.termsandconditions && "text-[#ff725b]"
             )}
           >
-            I accept Quizlet&apos;s Terms of Service and Privacy Policy
+            I accept Quizlet Clone Terms of Service and Privacy Policy
           </span>
         </label>
         {errors.termsandconditions && (
@@ -133,7 +143,10 @@ function SignInForm() {
             Sign up
           </button>
         ) : (
-          <button className="btn bg-[#3ccfcf] hover:bg-[#31a8a8]">
+          <button
+            className="btn bg-[#3ccfcf] hover:bg-[#31a8a8]"
+            onClick={() => setModalVisible(true)}
+          >
             Sign up
           </button>
         )}

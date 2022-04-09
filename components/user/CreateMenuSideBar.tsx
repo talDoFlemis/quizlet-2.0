@@ -1,5 +1,5 @@
 import { Menu } from "@headlessui/react"
-import React from "react"
+import React, { SetStateAction } from "react"
 import {
   ChevronDownIcon,
   FolderIcon,
@@ -7,8 +7,13 @@ import {
   UsersIcon,
 } from "@heroicons/react/outline"
 import cl from "clsx"
+import Link from "next/link"
 
-function CreateMenuSidebar() {
+function CreateMenuSidebar({
+  setNavbarMobileToggle,
+}: {
+  setNavbarMobileToggle: React.Dispatch<SetStateAction<boolean>>
+}) {
   return (
     <Menu as="div" className="relative">
       <Menu.Button
@@ -28,16 +33,18 @@ function CreateMenuSidebar() {
       >
         <Menu.Item>
           {({ active }) => (
-            <a
-              className={cl(
-                active && "bg-[#f6f7fb] text-black",
-                "flex items-center px-6 py-2 font-bold text-[#939bb4]"
-              )}
-              href="/account-settings"
-            >
-              <CollectionIcon className="mr-4 h-6 text-[#939bb4]" />
-              Study set
-            </a>
+            <Link href="/user/create-set">
+              <a
+                className={cl(
+                  active && "bg-[#f6f7fb] text-black",
+                  "flex items-center px-6 py-2 font-bold text-[#939bb4]"
+                )}
+                onClick={() => setNavbarMobileToggle(false)}
+              >
+                <CollectionIcon className="mr-4 h-6 text-[#939bb4]" />
+                Study set
+              </a>
+            </Link>
           )}
         </Menu.Item>
         <Menu.Item>
@@ -47,7 +54,6 @@ function CreateMenuSidebar() {
                 active && "bg-[#f6f7fb] text-black",
                 "flex items-center px-6 py-2 font-bold text-[#939bb4]"
               )}
-              href="/account-settings"
             >
               <FolderIcon className="mr-4 h-6 text-[#939bb4]" />
               Folder
@@ -61,7 +67,6 @@ function CreateMenuSidebar() {
                 active && "bg-[#f6f7fb] text-black",
                 "mb-2 flex items-center px-6 py-2 font-bold text-[#939bb4]"
               )}
-              href="/account-settings"
             >
               <UsersIcon className="mr-4 h-6 text-[#939bb4]" />
               Class

@@ -10,6 +10,7 @@ import Link from "next/link"
 import DropdownUserAvatar from "./DropdownUserAvatar"
 import DropdownNotifications from "./DropdownNotifications"
 import { useSession } from "next-auth/react"
+import ModalNotImplemented from "@components/layout/ModalNotImplemented"
 
 function Header() {
   const { data: session } = useSession()
@@ -19,8 +20,15 @@ function Header() {
   const router = useRouter()
   const { pathname } = router
 
+  const [isModalVisible, setModalVisible] = useState(false)
+
   return (
     <nav className="sticky top-0 z-30 flex h-[6vh] items-center justify-between bg-[#ffffff] px-4 shadow-md md:h-[8vh] md:px-8">
+      <ModalNotImplemented
+        text="Due to limited time, and just one guy working on the project, this functionality was not made yet"
+        isModalVisible={isModalVisible}
+        setModalVisible={setModalVisible}
+      />
       {navbarMobileToggle && (
         <div className="absolute top-0 left-0 z-50 flex min-h-screen w-full flex-col justify-start space-y-4 bg-white py-4 shadow-md">
           <XIcon
@@ -38,20 +46,20 @@ function Header() {
             </a>
           </Link>
           <a
-            href="https://quizlet.com/explanations"
             className={cl(
-              "header_hover_small relative w-full items-center justify-center pl-4 font-bold",
+              "header_hover_small relative w-full cursor-pointer items-center justify-center pl-4 font-bold",
               pathname === "/Explanation" && "header_current_small"
             )}
+            onClick={() => setModalVisible(true)}
           >
             Explanation
           </a>
-          <Link href="/dev-contact">
+          <Link href="/dev_contact">
             <a className="header_hover_small relative w-full items-center justify-center pl-4 font-bold">
               Dev Contact
             </a>
           </Link>
-          <CreateMenuSidebar />
+          <CreateMenuSidebar setNavbarMobileToggle={setNavbarMobileToggle} />
         </div>
       )}
       <div
@@ -77,11 +85,11 @@ function Header() {
           </a>
         </Link>
         <a
-          href="https://quizlet.com/explanations"
           className={cl(
-            "header_hover_highlight relative flex h-full items-center text-sm font-bold",
+            "header_hover_highlight relative flex h-full cursor-pointer items-center text-sm font-bold",
             pathname === "/explanation" && "header_current"
           )}
+          onClick={() => setModalVisible(true)}
         >
           Explanation
         </a>

@@ -9,6 +9,7 @@ import CreateMenuSidebar from "./CreateMenuSidebar"
 import Link from "next/link"
 import { ModalData } from "../../typings"
 import { Dispatch, SetStateAction } from "react"
+import ModalNotImplemented from "@components/layout/ModalNotImplemented"
 
 interface Props {
   setModalData: Dispatch<SetStateAction<ModalData>>
@@ -20,8 +21,15 @@ function Header({ setModalData }: Props) {
   const router = useRouter()
   const { pathname } = router
 
+  const [isModalVisible, setModalVisible] = useState(false)
+
   return (
     <nav className="sticky top-0 z-30 flex h-[6vh] items-center justify-between bg-[#ffffff] px-4 shadow-md md:h-[8vh] md:px-8">
+      <ModalNotImplemented
+        text="Due to limited time, and just one guy working on the project, this functionality was not made yet"
+        isModalVisible={isModalVisible}
+        setModalVisible={setModalVisible}
+      />
       {navbarMobileToggle && (
         <div className="absolute top-0 left-0 z-50 flex min-h-screen w-full flex-col justify-start space-y-4 bg-white py-4 shadow-md">
           <XIcon
@@ -38,22 +46,21 @@ function Header({ setModalData }: Props) {
               Home
             </a>
           </Link>
-          <Link href="/Subjects">
-            <a
-              className={cl(
-                "header_hover_small relative w-full items-center justify-center pl-4 font-bold",
-                pathname === "/Subjects" && "header_current_small"
-              )}
-            >
-              Subjects
-            </a>
-          </Link>
           <a
-            href="https://quizlet.com/explanations"
             className={cl(
-              "header_hover_small relative w-full items-center justify-center pl-4 font-bold",
+              "header_hover_small relative w-full cursor-pointer items-center justify-center pl-4 font-bold",
+              pathname === "/Subjects" && "header_current_small"
+            )}
+            onClick={() => setModalVisible(true)}
+          >
+            Subjects
+          </a>
+          <a
+            className={cl(
+              "header_hover_small relative w-full cursor-pointer items-center justify-center pl-4 font-bold",
               pathname === "/Explanation" && "header_current_small"
             )}
+            onClick={() => setModalVisible(true)}
           >
             Explanation
           </a>
@@ -87,22 +94,21 @@ function Header({ setModalData }: Props) {
             Home
           </a>
         </Link>
-        <Link href="/">
-          <a
-            className={cl(
-              "header_hover_highlight relative h-full items-center text-sm font-bold md:flex",
-              pathname === "/subject" && "header_current"
-            )}
-          >
-            Subjects
-          </a>
-        </Link>
         <a
-          href="https://quizlet.com/explanations"
           className={cl(
-            "header_hover_highlight relative flex h-full items-center text-sm font-bold",
+            "header_hover_highlight relative h-full cursor-pointer items-center text-sm font-bold md:flex",
+            pathname === "/subject" && "header_current"
+          )}
+          onClick={() => setModalVisible(true)}
+        >
+          Subjects
+        </a>
+        <a
+          className={cl(
+            "header_hover_highlight relative flex h-full cursor-pointer items-center text-sm font-bold",
             pathname === "/explanation" && "header_current"
           )}
+          onClick={() => setModalVisible(true)}
         >
           Explanation
         </a>

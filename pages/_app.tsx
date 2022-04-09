@@ -18,12 +18,12 @@ function MyApp({
     <SessionProvider session={session}>
       {Component.PageLayout ? (
         <Component.PageLayout>
-          <NextNProgress color="#f34b5a" />
+          <NextNProgress color="#4255ff" />
           <Component {...pageProps} />
         </Component.PageLayout>
       ) : (
         <>
-          <NextNProgress color="#f34b5a" />
+          <NextNProgress color="#4255ff" />
           <Component {...pageProps} />
         </>
       )}

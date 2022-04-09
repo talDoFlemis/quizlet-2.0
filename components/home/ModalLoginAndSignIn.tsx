@@ -18,7 +18,7 @@ function ModalLoginAndSignIn({ modalData, setModalData }: Props) {
       <Transition appear show={modalData?.modalOpen} as={Fragment}>
         <Dialog
           as="div"
-          className="fixed inset-0 z-50 h-screen w-screen overflow-y-auto"
+          className="fixed inset-0 z-40 h-screen w-screen overflow-y-auto"
           onClose={() => setModalData({ modalOpen: false })}
         >
           <div className="h-full w-full text-center">

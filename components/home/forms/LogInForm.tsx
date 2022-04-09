@@ -89,7 +89,7 @@ function LogInForm() {
       {errorOauth === "OAuthSignin" && (
         <div className="text-[#ff725b]">
           {" "}
-          The OAuth autenticantion is unavailable for now
+          The OAuth autenticantion was not set on .env file
         </div>
       )}
       <form onSubmit={handleSubmit(onSubmit)} className="form-control">

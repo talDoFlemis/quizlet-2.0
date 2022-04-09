@@ -15,6 +15,7 @@ module.exports = {
       "cdn.jsdelivr.net",
       "github.com",
       "raw.githubusercontent.com",
+      "c.tenor.com",
     ],
   },
 }
