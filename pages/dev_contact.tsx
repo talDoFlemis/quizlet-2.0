@@ -14,16 +14,16 @@ import Link from "next/link"
 
 function DevContact({ userInfo }: { userInfo: userGithubData }) {
   return (
-    <div className="mx-auto flex h-screen w-screen flex-col overflow-x-hidden md:container">
+    <div className="mx-auto flex min-h-screen w-screen flex-col overflow-x-hidden md:container">
       <Link href="/">
         <a>
-          <ArrowLeftIcon className="mt-4 h-8 w-8 rounded-md hover:bg-[#4255ff5b] hover:text-[#4255ff]" />
+          <ArrowLeftIcon className="ml-4 sm:ml-0 mt-4 h-8 w-8 rounded-md hover:bg-[#4255ff5b] hover:text-[#4255ff]" />
         </a>
       </Link>
       <h1 className="text-center text-5xl font-extrabold sm:text-6xl md:text-7xl">
         Developer Contact
       </h1>
-      <div className="mx-auto my-auto flex w-full flex-col px-12 py-8 sm:flex-row sm:space-x-8 sm:p-8 xl:h-[80vh] xl:w-[80vw]">
+      <div className="mx-auto my-auto flex w-full flex-col px-12 py-8 sm:flex-row sm:space-x-8 sm:p-8 xl:h-4/5 xl:w-4/5">
         <div className="mx-auto flex h-full w-4/5 flex-col items-center justify-center sm:w-2/5 md:w-1/5 md:justify-evenly">
           <div className="mask mask-circle relative h-64 w-full">
             <a href={userInfo.url}>
